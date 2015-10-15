@@ -128,9 +128,10 @@ nav {
   position: relative; }
 
 .post-image {
-  background-color: #999; }
+  background-color: #e1e1e1; }
   .post-image img {
     display: block;
+    max-width: 100%;
     width: auto;
     height: 400px;
     margin: 0 auto; }
@@ -138,7 +139,7 @@ nav {
 .post-info {
   border-radius: 5px 5px 0 0;
   padding: 10px 20px;
-  background-color: #777; }
+  background-color: #bbb; }
   .post-info .post-title {
     font-family: #FF4351;
     font-size: 1.5em; }
@@ -150,7 +151,7 @@ nav {
     margin-left: 10px; }
 
 .post-description {
-  background-color: #777;
+  background-color: #bbb;
   margin: 0;
   font-family: "Roboto", sans-serif;
   padding: 20px 30px;
@@ -162,40 +163,92 @@ nav {
   right: 12px;
   padding: 8px; }
 
-.upvote, .downvote {
+.upvote, .downvote, .post-button {
   background-color: #FF4351;
   border: 0;
   color: white;
   width: 30px;
   height: 30px;
   transition: background-color 0.4s; }
-  .upvote:hover, .downvote:hover {
+  .upvote:hover, .downvote:hover, .post-button:hover {
     cursor: pointer;
     background-color: #ff7680; }
+  .upvote:active, .downvote:active, .post-button:active, .upvote:focus, .downvote:focus, .post-button:focus {
+    outline: 0; }
 
 .downvote {
-  background-color: #212121; }
+  background-color: #444; }
+  .downvote:hover {
+    background-color: #555; }
 
 .post-comments {
-  background-color: #888;
-  padding-bottom: 10px; }
+  padding-bottom: 10px;
+  background-color: #bbb; }
   .post-comments > p:first-child {
     color: #f1f1f1;
     padding: 0 30px;
     font-family: "Roboto", sans-serif;
     padding: 10px 20px;
     font-size: 1.2em;
-    background-color: #212121; }
+    background-color: #FF4351; }
 
 .comment {
+  background-color: #bbb;
   padding: 10px;
-  margin-left: 10px; }
+  padding-left: 30px;
+  border-left: 0px solid transparent;
+  transition: all 0.4s; }
+  .comment:hover {
+    padding-left: 30px;
+    border-left: 8px solid #FF4351;
+    background-color: #f1f1f1; }
 
 .comment-author, .comment-datetime {
   display: inline-block; }
 
+.comment-author {
+  color: #f00; }
+
 .comment-datetime {
   font-size: 0.8em;
   padding-left: 5px; }
+
+.comment-text {
+  font-size: 0.9em;
+  font-family: "Source Sans Pro"; }
+
+.comment-child {
+  margin-left: 30px;
+  margin-top: 10px; }
+
+.child-a {
+  background-color: #ccc; }
+
+.child-b {
+  background-color: #bbb; }
+
+.post-new {
+  margin-bottom: 30px;
+  padding-bottom: 100px; }
+  .post-new p:first-child {
+    font-size: 1.3em;
+    padding: 20px;
+    padding-left: 60px; }
+  .post-new textarea {
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
+    width: 700px;
+    height: 200px;
+    font-family: "Roboto", sans-serif; }
+    .post-new textarea:focus, .post-new textarea:active {
+      outline: 2px solid rgba(255, 67, 81, 0.5); }
+
+.post-button {
+  width: 60px;
+  position: absolute;
+  height: 40px;
+  right: 50px;
+  margin-top: 30px; }
 
 /*# sourceMappingURL=stylesheet.css.map */
