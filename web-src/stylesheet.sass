@@ -17,7 +17,7 @@ body, html
 	width: 100%
 	height: 100%
 	max-width: 100%
-	background-color: $white
+	background-color: #fcfcfc
 p
 	font-family: $main-font
 	padding: 0
@@ -135,7 +135,7 @@ nav
 	position: relative
 
 .post-image
-	background-color: #e1e1e1
+	background-color: $white
 	img
 		display: block
 		max-width: 100%
@@ -145,8 +145,8 @@ nav
 
 .post-info
 	border-radius: 5px 5px 0 0
-	padding: 10px 20px
-	background-color: #bbb
+	padding: 15px 25px
+	background-color: #ddd
 	.post-title
 		font-family: $secondary-color
 		font-size: 1.5em
@@ -157,7 +157,7 @@ nav
 	.post-author
 		margin-left: 10px
 .post-description
-	background-color: #bbb
+	background-color: #ddd
 	margin: 0
 	font-family: $main-font
 	padding: 20px 30px
@@ -165,10 +165,9 @@ nav
 
 .post-vote
 	position: absolute
-	top: 10px
+	top: 13px
 	right: 12px
 	padding: 8px
-	//background-color: $white
 
 .upvote
 	background-color: $secondary-color
@@ -191,7 +190,7 @@ nav
 
 .post-comments
 	padding-bottom: 10px
-	background-color: #bbb
+	background-color: #ddd
 	> p:first-child
 		color: $white
 		padding: 0 30px
@@ -202,9 +201,11 @@ nav
 
 
 .comment
-	background-color: #bbb
+	position: relative
+	background-color: #ddd
 	padding: 10px
 	padding-left: 30px
+	padding-right: 0
 	border-left: 0px solid transparent
 	transition: all .4s
 	&:hover
@@ -228,7 +229,25 @@ nav
 .child-a
 	background-color: #ccc
 .child-b
-	background-color: #bbb
+	background-color: #ddd
+.comment-reply
+	background-color: transparent
+	border: 0
+	position: absolute
+	right: 20px
+	top: 20px
+	color: $secondary-color
+	font-weight: bold
+	&:hover
+		cursor: pointer
+		text-decoration: underline
+.comment-vote
+	position: absolute
+	left: 5px
+	button
+		display: block
+		width: 20px
+		height: 20px
 
 .post-new
 	margin-bottom: 30px

@@ -7,7 +7,7 @@ body, html {
   width: 100%;
   height: 100%;
   max-width: 100%;
-  background-color: #f1f1f1; }
+  background-color: #fcfcfc; }
 
 p {
   font-family: "Roboto", sans-serif;
@@ -128,7 +128,7 @@ nav {
   position: relative; }
 
 .post-image {
-  background-color: #e1e1e1; }
+  background-color: #f1f1f1; }
   .post-image img {
     display: block;
     max-width: 100%;
@@ -138,8 +138,8 @@ nav {
 
 .post-info {
   border-radius: 5px 5px 0 0;
-  padding: 10px 20px;
-  background-color: #bbb; }
+  padding: 15px 25px;
+  background-color: #ddd; }
   .post-info .post-title {
     font-family: #FF4351;
     font-size: 1.5em; }
@@ -151,7 +151,7 @@ nav {
     margin-left: 10px; }
 
 .post-description {
-  background-color: #bbb;
+  background-color: #ddd;
   margin: 0;
   font-family: "Roboto", sans-serif;
   padding: 20px 30px;
@@ -159,7 +159,7 @@ nav {
 
 .post-vote {
   position: absolute;
-  top: 10px;
+  top: 13px;
   right: 12px;
   padding: 8px; }
 
@@ -183,7 +183,7 @@ nav {
 
 .post-comments {
   padding-bottom: 10px;
-  background-color: #bbb; }
+  background-color: #ddd; }
   .post-comments > p:first-child {
     color: #f1f1f1;
     padding: 0 30px;
@@ -193,9 +193,11 @@ nav {
     background-color: #FF4351; }
 
 .comment {
-  background-color: #bbb;
+  position: relative;
+  background-color: #ddd;
   padding: 10px;
   padding-left: 30px;
+  padding-right: 0;
   border-left: 0px solid transparent;
   transition: all 0.4s; }
   .comment:hover {
@@ -225,7 +227,27 @@ nav {
   background-color: #ccc; }
 
 .child-b {
-  background-color: #bbb; }
+  background-color: #ddd; }
+
+.comment-reply {
+  background-color: transparent;
+  border: 0;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  color: #FF4351;
+  font-weight: bold; }
+  .comment-reply:hover {
+    cursor: pointer;
+    text-decoration: underline; }
+
+.comment-vote {
+  position: absolute;
+  left: 5px; }
+  .comment-vote button {
+    display: block;
+    width: 20px;
+    height: 20px; }
 
 .post-new {
   margin-bottom: 30px;
