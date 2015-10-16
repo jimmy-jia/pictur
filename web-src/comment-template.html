@@ -27,7 +27,9 @@ Comment opening div
 		<p class="comment-datetime">{{Datetime}}</p>
 		<p class="comment-text">{{Text}}</p>
 		<button class="comment-reply">reply</button>
+
 		<!-- Insert reply/comment nesting here.
+			{{for each comment.child in comment}}
 			//denote a child using comment-child class, and alternate child-a and child-b depending on depth level of comment tree. Comments of same level have same child type.
 
 			<div class="comment comment-child child-a">

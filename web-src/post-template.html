@@ -1,0 +1,45 @@
+<!--
+Post Structure
+Parent div is the main div
+Each post uses the following post structure
+
+post opening section
+	post-info			//info container
+		post-title		//title of post
+		post-author		//author name inserted
+		post-datetime	//post date/time inserted
+	post-vote			//voting structure
+	post-image			//image div
+		img 			//the image(s)
+	post-subinfo		//rest of info
+		post-description //text of post inserted
+	post-comments		//comment structure
+		comments		//comments under current post
+-->
+
+
+
+
+<section class="post">
+	<div class="post-info">
+		<h1 class="post-title">{{Title}}</h1>
+		<h3 class="post-author">Posted by: {{Author}}</h3>
+		<h3 class="post-datetime"> at {{Datetime}}</h3>
+	</div>
+	<div class="post-vote">
+		<button class="upvote"></button>
+		<button class="downvote"></button>
+	</div>
+	<div class="post-image">
+		<img src="{{image_url}}"/>
+	</div>
+	<div class="post-subinfo">
+		<h4 class="post-description">{{description}}</h4>
+	</div>
+	<div class="post-comments">
+		<p>Comments</p>
+		<!--
+			Comments inserted here based off comment-template
+		-->
+	</div>
+</section>
