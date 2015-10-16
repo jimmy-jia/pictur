@@ -1,0 +1,39 @@
+<!--
+Comment Structure
+Parent div for all comments: post-comments
+Each comment uses the following comment structure
+
+Comment opening div
+	comment-vote			//voting structure
+	comment-author			//author name inserted
+	comment-datetime		//post date/time inserted
+	comment-text			//text of comment inserted
+	comment-reply			//reply button
+	//optional
+	comment-child			//a single child of comment, can print multiple of these
+-->
+
+
+
+
+<!--<div class="post-comments">  //The parent structure
+	<p>Comments</p>-->
+	<div class="comment">
+		<div class="comment-vote">
+			<button class="upvote">^</button>
+			<button class="downvote">v</button>
+		</div>
+		<p class="comment-author">{{Author}}</p>
+		<p class="comment-datetime">{{Datetime}}</p>
+		<p class="comment-text">{{Text}}</p>
+		<button class="comment-reply">reply</button>
+		<!-- Insert reply/comment nesting here.
+			//denote a child using comment-child class, and alternate child-a and child-b depending on depth level of comment tree. Comments of same level have same child type.
+
+			<div class="comment comment-child child-a">
+				//insert standard comment structure here
+			</div>
+
+		-->
+	</div>
+<!--</div>-->
