@@ -15,7 +15,7 @@ def index():
 def profile(image_id):
     '''image_data = get_image_metadata(image_id) #image_data should be a dictionary of title, description, etc.'''
     post = {"title":"This fox likes being brushed", "description":"Check this out", "time":"16:15:14 2015-16-32"}
-    return render_template('index.html', post=post)
+    return render_template('index.html', post=post, image='static/resources/postimages/{}.gif'.format(image_id))
 #, image_id = image_id, image_data = image_data)
 
 @app.route('/upload', methods=['GET', 'POST'])
