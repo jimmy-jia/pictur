@@ -45,9 +45,9 @@
 
 				<section class="post">
 					<div class="post-info">
-						<h1 class="post-title">This fox likes being brushed</h1>
-						<h3 class="post-author">Posted by: Prof. Singha</h3>
-						<h3 class="post-datetime"> at 8:23 AM 8/12/15</h3>
+						<h1 class="post-title">{{ post.title }}</h1>
+						<h3 class="post-author">Posted by: {{ post.nickname }}</h3>
+						<h3 class="post-datetime">at {{ post.time }}</h3>
 					</div>
 					<div class="post-vote">
 						<button class="upvote"></button>
@@ -57,7 +57,7 @@
 						<img src="https://i.imgur.com/g77dAsa.gif"/>
 					</div>
 					<div class="post-subinfo">
-						<h4 class="post-description">Check this out!</h4>
+						<h4 class="post-description">{{ post.description }}</h4>
 					</div>
 					<div class="post-comments">
 						<p>Comments</p>

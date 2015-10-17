@@ -8,13 +8,16 @@ UPLOADS_FOLDER = ''
 @app.route('/')
 @app.route('/index')
 def index():
-	'''images = get_recent_images() #images should be a list of image id's '''
-    return render_template('index.html')#, images = images)
+    '''images = get_recent_images() #images should be a list of image id's '''
+    post = {"title":"This fox likes being brushed", "description":"Check this out", "time":"16:15:14 2015-16-32"}
+    return render_template('index.html', post=post, image='static/resources/postimages/1.gif')
+#, images = images)
 	
 @app.route('/i=<image_id>')
 def profile(image_id):
-	'''image_data = get_image_metadata(image_id) #image_data should be a dictionary of title, description, etc.'''
-    return render_template('index.html')
+    '''image_data = get_image_metadata(image_id) #image_data should be a dictionary of title, description, etc.'''
+    post = {"title":"This fox likes being brushed", "description":"Check this out", "time":"16:15:14 2015-16-32"}
+    return render_template('index.html', post=post, image='static/resources/postimages/{}.gif'.format(image_id))
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
