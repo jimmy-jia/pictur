@@ -39,7 +39,28 @@ def select_comments_for_post(pid):
     sel = comment_table.select().values(post_pid=pid)
     result = conn.execute(sel)
     conn.close()
-    return result
+    comments = []
+    for comment in result:
+        reformat = {}
+        reformat['cid'] = comment[comment_table.c.cid]
+        reformat['likes'] = comment[comment_table.c.likes]
+        reformat['text'] = comment[comment_table.c.text]
+        reformat['time'] = comment[comment_table.c.time]
+        reformat['uid'] = comment[comment_table.c.uid]
+        reformat['parent_cid'] = comment[comment_table.c.parent_cid]
+        reformat['post_pid'] = comment[comment_table.c.post_pid]
+        reformat['children'] = []
+        comments.append(reformat)
+    base = []
+    change = 1
+    for comment in comments:
+        if comment['parent_cid'] is None:
+            base.append(comment)
+        else:
+            for p_comment in comments:
+                if p_comment['cid'] == comment['parent_cid']:
+                    p_comment['children'].append(comment)
+    return base
 
 def initialize_db_connection(table_name):
     engine = create_engine("mysql://root:4tspicturhost@localhost/pictur")
