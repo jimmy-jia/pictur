@@ -8,7 +8,8 @@ UPLOADS_FOLDER = ''
 @app.route('/index')
 def index():
     '''images = get_recent_images() #images should be a list of image id's '''
-    return render_template('index.html')
+    post = {"title":"This fox likes being brushed", "description":"Check this out", "time":"16:15:14 2015-16-32"}
+    return render_template('index.html', post=post, image='static/resources/postimages/1.gif')
 #, images = images)
 	
 @app.route('/i=<image_id>')
