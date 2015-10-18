@@ -38,7 +38,6 @@ def image(image_id):
             return redirect(url_for('image', image_id = image_id))
     post = sql_controller.select_post(image_id)
     response = render_template('index.html', post=post, image='static/resources/postimages/{}.gif'.format(image_id))
-    response.cache_control.max_age = 604800
     return response
 
 @app.route('/upload', methods=['GET', 'POST'])

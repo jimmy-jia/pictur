@@ -127,7 +127,6 @@ nav {
     display: inline-block; }
     .post-container div a {
       width: 100%;
-      max-width: 300px;
       max-height: 400px;
       height: auto;
       display: block;
@@ -156,6 +155,11 @@ nav {
     -moz-column-count: 2;
     -webkit-column-count: 2;
     column-count: 2; } }
+@media(max-width: 375px) {
+  .post-container {
+    -moz-column-count: 1;
+    -webkit-column-count: 1;
+    column-count: 1; } }
 .post {
   max-width: 100%;
   width: 800px;
@@ -349,10 +353,14 @@ nav {
       border: 0;
       background-color: #FF4351;
       color: white;
-      padding: 15px 15px; }
+      padding: 15px 15px;
+      font-family: "Roboto", sans-serif;
+      font-weight: 300; }
       .upload input[type="submit"]:hover {
         background-color: #ff7680;
         cursor: pointer; }
+      .upload input[type="submit"]:focus, .upload input[type="submit"]:active {
+        outline: none; }
 
 .upload-wrapper {
   width: 350px;
@@ -377,7 +385,8 @@ nav {
     display: inline-block;
     padding: 15px 5px;
     margin: 0;
-    float: left; }
+    float: left;
+    padding-left: 20px; }
 
 #fileUpload-text {
   pointer-events: none; }

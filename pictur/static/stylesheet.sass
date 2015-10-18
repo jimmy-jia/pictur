@@ -75,9 +75,8 @@ nav
 		transition: background-color .4s
 		&:focus, &:active
 			outline: 0
-			background-color: darken($white, 8)
+			background-color: lighten($white, 8)
 .close
-	//background-image: url(resources/icons/close.svg)
 	background-size: cover
 	width: 35px
 	height: 35px
@@ -93,16 +92,12 @@ nav
 			fill: $secondary-color
 	&:hover
 		cursor: pointer
-
-
 #main
-	padding-top: 70px
-
-
+	padding-top: 50px
 .home
 	.banner
+		padding-bottom: 50px
 		background-color: $gold
-		height: 600px
 		background-image: url(resources/pow.jpg)
 		background-position: center center
 		background-size: cover
@@ -120,31 +115,54 @@ nav
 
 
 .post-container
+	-moz-column-count: 5
+	-webkit-column-count: 5
+	column-count: 5
 	max-width: 100%
-	width: 1000px
+	width: 1500px
 	margin: 0 auto
 	background-color: $white
 	padding: 20px
-	display: flex
-	flex-wrap: wrap
-	justify-content: center
 	div
-		width: 300px
-		height: 300px
-		margin: 5px
-		overflow: hidden
-		position: relative
-		border: 2px solid $black
-		img
+		width: 100%
+		max-width: 100%
+		height: auto
+		display: inline-block
+		a
 			width: 100%
+			max-height: 400px
 			height: auto
+			display: block
 			overflow: hidden
 			opacity: .9
 			transition: opacity .4s
 			&:hover
 				opacity: 1
 				cursor: pointer
-
+			img
+				width: 100%
+				height: auto
+@media(max-width: 1300px)
+	.post-container
+		-moz-column-count: 4
+		-webkit-column-count: 4
+		column-count: 4
+@media(max-width: 900px)
+	.post-container
+		-moz-column-count: 3
+		-webkit-column-count: 3
+		column-count: 3
+@media(max-width: 600px)
+	.post-container
+		-moz-column-count: 2
+		-webkit-column-count: 2
+		column-count: 2
+@media(max-width: 375px)
+	.post-container
+		-moz-column-count: 1
+		-webkit-column-count: 1
+		column-count: 1
+				
 .post
 	max-width: 100%
 	width: 800px
@@ -152,14 +170,14 @@ nav
 	border-radius: 5px
 	box-shadow: 0 0 8px 1px rgba(#555, .5)
 	position: relative
-
+	margin-top: 20px
 .post-image
 	background-color: $white
 	img
 		display: block
 		max-width: 100%
 		width: auto
-		height: 400px
+		height: auto
 		margin: 0 auto
 
 .post-info
@@ -334,9 +352,13 @@ nav
 			background-color: $secondary-color
 			color: white
 			padding: 15px 15px
+			font-family: $main-font
+			font-weight: 300
 			&:hover
 				background-color: lighten($secondary-color, 10)
 				cursor: pointer
+			&:focus, &:active
+				outline: none
 	
 .upload-wrapper
 	width: 350px
@@ -362,6 +384,7 @@ nav
 		padding: 15px 5px
 		margin: 0
 		float: left
+		padding-left: 20px
 #fileUpload-text
 	pointer-events: none
 
