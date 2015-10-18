@@ -49,3 +49,6 @@ Temporary Items
 *.py~
 *.html~
 *.css~
+
+# Uploaded images
+pictur/static/resources/postimages

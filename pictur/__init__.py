@@ -1,3 +1,4 @@
 from flask import Flask
 app = Flask(__name__)
-import pictur.views
+app.host = '0.0.0.0'
+from pictur import views

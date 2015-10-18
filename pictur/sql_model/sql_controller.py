@@ -3,7 +3,7 @@ from sqlalchemy import Table, Column, Integer, String, MetaData, ForeignKey, cre
 def insert_post(tags, uid, description, title):
     post_table, conn = initialize_db_connection("Post")
     ins = post_table.insert().values(tags=tags, uid=uid, description=description, likes=0, title=title)
-    result = conn.execute(ins)
+    result = conn.execute(ins)  
     conn.close()
     return result.inserted_primary_key
 
@@ -28,10 +28,10 @@ def delete_comment(cid):
 
 def select_post(pid):
     post_table, conn = initialize_db_connection("Post")
-    sel = post_table.select().values(pid=pid)
+    sel = post_table.select().where(post_table.c.pid==pid)
     result = conn.execute(sel)
     conn.close()
-    return result
+    return result.fetchone()
 
 
 def select_comments_for_post(pid):
@@ -42,11 +42,11 @@ def select_comments_for_post(pid):
     return result
 
 def initialize_db_connection(table_name):
-    engine = create_engine("mysql://root:4tspicturhost@localhost/pictur")
+    engine = create_engine("mysql+pymysql://root:4tspicturhost@localhost/pictur")
     conn = engine.connect()
     meta = MetaData()
     meta.bind = engine
-    table = Table(table_name, meta, autoLoad=True)
+    table = Table(table_name, meta, autoload=True, autoload_with=engine)
     return table, conn
 
 
