@@ -43,7 +43,7 @@ def select_n_post(n):
 
 def select_comments_for_post(pid):
     comment_table, conn = initialize_db_connection("Comment")
-    sel = comment_table.select().values(post_pid=pid)
+    sel = comment_table.select().where(comment_table.c.post_pid==pid)
     result = conn.execute(sel)
     conn.close()
     comments = []
