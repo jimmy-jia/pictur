@@ -39,7 +39,6 @@ def image(image_id):
     post = sql_controller.select_post(image_id)
     comments = sql_controller.select_comments_for_post(image_id)
     response = render_template('index.html', post=post, comments=comments, image='{}/{}.gif'.format(UPLOADS_FOLDER, image_id))
-    response.cache_control.max_age = 604800
     return response
 
 @app.route('/upload', methods=['GET', 'POST'])
