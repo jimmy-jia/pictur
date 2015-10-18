@@ -3,7 +3,7 @@ from sqlalchemy import Table, Column, Integer, String, MetaData, ForeignKey, cre
 def insert_post(tags, uid, description, title):
     post_table, conn = initialize_db_connection("Post")
     ins = post_table.insert().values(tags=tags, uid=uid, description=description, likes=0, title=title)
-    result = conn.execute(ins)
+    result = conn.execute(ins)  
     conn.close()
     return result.inserted_primary_key
 
@@ -28,7 +28,14 @@ def delete_comment(cid):
 
 def select_post(pid):
     post_table, conn = initialize_db_connection("Post")
-    sel = post_table.select().values(pid=pid)
+    sel = post_table.select().where(post_table.c.pid==pid)
+    result = conn.execute(sel)
+    conn.close()
+    return result.fetchone()
+
+def select_n_post(n):
+    post_table, conn = initialize_db_connection("Post")
+    sel = post_table.select().order_by(post_table.c.time).limit(n)
     result = conn.execute(sel)
     conn.close()
     return result
@@ -39,14 +46,35 @@ def select_comments_for_post(pid):
     sel = comment_table.select().values(post_pid=pid)
     result = conn.execute(sel)
     conn.close()
-    return result
+    comments = []
+    for comment in result:
+        reformat = {}
+        reformat['cid'] = comment[comment_table.c.cid]
+        reformat['likes'] = comment[comment_table.c.likes]
+        reformat['text'] = comment[comment_table.c.text]
+        reformat['time'] = comment[comment_table.c.time]
+        reformat['uid'] = comment[comment_table.c.uid]
+        reformat['parent_cid'] = comment[comment_table.c.parent_cid]
+        reformat['post_pid'] = comment[comment_table.c.post_pid]
+        reformat['children'] = []
+        comments.append(reformat)
+    base = []
+    change = 1
+    for comment in comments:
+        if comment['parent_cid'] is None:
+            base.append(comment)
+        else:
+            for p_comment in comments:
+                if p_comment['cid'] == comment['parent_cid']:
+                    p_comment['children'].append(comment)
+    return base
 
 def initialize_db_connection(table_name):
-    engine = create_engine("mysql://root:4tspicturhost@localhost/pictur")
+    engine = create_engine("mysql+pymysql://root:4tspicturhost@localhost/pictur")
     conn = engine.connect()
     meta = MetaData()
     meta.bind = engine
-    table = Table(table_name, meta, autoLoad=True)
+    table = Table(table_name, meta, autoload=True, autoload_with=engine)
     return table, conn
 
 

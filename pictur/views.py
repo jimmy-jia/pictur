@@ -1,47 +1,58 @@
 from pictur import app
 from flask import Flask, url_for, redirect, request, render_template
 import os
+from pictur.sql_model import sql_controller
 
-UPLOADS_FOLDER = 'static/resources/postimages'
+UPLOADS_FOLDER = '/root/pictur/pictur/static/resources/postimages/'
 
-TEMP_COMMENTS = [{'uid':6077,
-                  'time':'15:00',
-                  'text':'test post 1',
-                  'children':[{'uid':190, 'time': '15:00', 'text':'testpost2', 'children':[]},
-                              {'uid':3, 'time':'17:00', 'text':'testpost3', 'children':[{'uid':53, 'time':'15:00', 'text':'testpost4', 'children':[]}]}]},
-                 {'uid':666, 'time':'2:30', 'text':'testpost master', 'children':[]}]
-
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def index():
-    '''images = get_recent_images() #images should be a list of image id's '''
-    post = {"title":"This fox likes being brushed", "description":"Check this out", "time":"16:15:14 2015-16-32"}
-    return render_template('index.html', post=post, image='UPLOADS_FOLDER/{}.gif')
-#, images = images)
+    if request.method == 'POST' and UPLOADS_FOLDER is not '':
+        file = request.files['file']
+        if file:
+            tags = request.form['tags']
+            uid = 0 # get a real user later
+            description = request.form['description']
+            title = request.form['title']
+            image_id = sql_controller.insert_post(tags, uid, description, title)[0]
+            filename = str(image_id) + '.gif'
+            file.save(os.path.join(UPLOADS_FOLDER, filename))
+            return redirect(url_for('image', image_id = image_id))
+    n_to_display = 9
+    posts = sql_controller.select_n_post(n_to_display)
+    return render_template('front.html', posts = posts)
 	
-@app.route('/i=<image_id>')
-def profile(image_id):
-    '''image_data = get_image_metadata(image_id) #image_data should be a dictionary of title, description, etc.'''
-    post = {"title":"This fox likes being brushed", "description":"Check this out", "nickname":"ProfSingha", "time":"16:15:14 2015-16-32"}
-    testcomment = '''
-						<div class="comment child-b">
-							<div class="comment-vote">
-								<button class="upvote"></button>
-								<button class="downvote"></button>
-							</div>
-    '''
-    return render_template('index.html', post=post, image='{}/{}.gif'.format(UPLOADS_FOLDER, image_id), comments=TEMP_COMMENTS)
-#, image_id = image_id, image_data = image_data)
+@app.route('/i<image_id>', methods=['GET', 'POST'])
+def image(image_id):
+    if request.method == 'POST' and UPLOADS_FOLDER is not '':
+        file = request.files['file']
+        if file:
+            tags = request.form['tags']
+            uid = 0 # get a real user later
+            description = request.form['description']
+            title = request.form['title']
+            image_id = sql_controller.insert_post(tags, uid, description, title)[0]
+            filename = str(image_id) + '.gif'
+            file.save(os.path.join(UPLOADS_FOLDER, filename))
+            return redirect(url_for('image', image_id = image_id))
+    post = sql_controller.select_post(image_id)
+    comments = sql_controller.select_comments_for_post(image_id)
+    response = render_template('index.html', post=post, comments=comments, image='{}/{}.gif'.format(UPLOADS_FOLDER, image_id))
+    response.cache_control.max_age = 604800
+    return response
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
-    '''if request.method == 'POST' and UPLOADS_FOLDER is not '':
+    if request.method == 'POST' and UPLOADS_FOLDER is not '':
         file = request.files['file']
-                image_id = upload_to_database(file) #filename should be an image id
-                filename = image_id + '.png'
-        file.save(os.path.join(UPLOADS_FOLDER, filename))
-        return redirect(url_for('/i/' + image_id))'''
-    return render_template('index.html')
-
-# def commentGenerator(comment):
-#       return comment.getChildren() 
+        if file:
+            tags = request.form['tags']
+            uid = 0 # get a real user later
+            description = request.form['description']
+            title = request.form['title']
+            image_id = sql_controller.insert_post(tags, uid, description, title)[0]
+            filename = str(image_id) + '.gif'
+            file.save(os.path.join(UPLOADS_FOLDER, filename))
+            return redirect(url_for('image', image_id = image_id))
+    return render_template('upload.html')

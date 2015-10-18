@@ -20,7 +20,8 @@ a {
   color: #2c3e50;
   transition: color 0.4s; }
   a:hover {
-    color: white; }
+    color: white;
+    cursor: pointer; }
 
 li, ul {
   list-style: none;
@@ -70,14 +71,31 @@ nav {
     transition: background-color 0.4s; }
     nav input:focus, nav input:active {
       outline: 0;
-      background-color: #dddddd; }
+      background-color: white; }
+
+.close {
+  background-size: cover;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  top: 5px;
+  right: 5px; }
+  .close svg {
+    fill: #666;
+    height: 35px;
+    width: 35px;
+    transition: fill 0.4s; }
+    .close svg:hover {
+      fill: #FF4351; }
+  .close:hover {
+    cursor: pointer; }
 
 #main {
-  padding-top: 70px; }
+  padding-top: 50px; }
 
 .home .banner {
+  padding-bottom: 50px;
   background-color: #ffee99;
-  height: 600px;
   background-image: url(resources/pow.jpg);
   background-position: center center;
   background-size: cover;
@@ -94,38 +112,58 @@ nav {
     padding-top: 15px; }
 
 .post-container {
+  -moz-column-count: 5;
+  -webkit-column-count: 5;
+  column-count: 5;
   max-width: 100%;
-  width: 1000px;
+  width: 1500px;
   margin: 0 auto;
   background-color: #f1f1f1;
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; }
+  padding: 20px; }
   .post-container div {
-    width: 300px;
-    height: 300px;
-    margin: 5px;
-    overflow: hidden;
-    position: relative;
-    border: 2px solid #212121; }
-    .post-container div img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: inline-block; }
+    .post-container div a {
       width: 100%;
+      max-width: 300px;
+      max-height: 400px;
       height: auto;
+      display: block;
       overflow: hidden;
       opacity: 0.9;
       transition: opacity 0.4s; }
-      .post-container div img:hover {
+      .post-container div a:hover {
         opacity: 1;
         cursor: pointer; }
+      .post-container div a img {
+        width: 100%;
+        height: auto; }
 
+@media(max-width: 1300px) {
+  .post-container {
+    -moz-column-count: 4;
+    -webkit-column-count: 4;
+    column-count: 4; } }
+@media(max-width: 900px) {
+  .post-container {
+    -moz-column-count: 3;
+    -webkit-column-count: 3;
+    column-count: 3; } }
+@media(max-width: 600px) {
+  .post-container {
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-count: 2; } }
 .post {
   max-width: 100%;
   width: 800px;
   margin: 0 auto;
   border-radius: 5px;
   box-shadow: 0 0 8px 1px rgba(85, 85, 85, 0.5);
-  position: relative; }
+  position: relative;
+  margin-top: 20px; }
 
 .post-image {
   background-color: #f1f1f1; }
@@ -133,7 +171,7 @@ nav {
     display: block;
     max-width: 100%;
     width: auto;
-    height: 400px;
+    height: auto;
     margin: 0 auto; }
 
 .post-info {
@@ -170,7 +208,7 @@ nav {
   width: 30px;
   height: 30px;
   transition: background-color 0.4s;
-  background-image: url(up.svg);
+  background-image: url(resources/icons/up.svg);
   background-size: cover; }
   .upvote:hover, .downvote:hover, .post-button:hover {
     cursor: pointer;
@@ -180,7 +218,7 @@ nav {
 
 .downvote {
   background-color: #444;
-  background-image: url(down.svg); }
+  background-image: url(resources/icons/down.svg); }
   .downvote:hover {
     background-color: #555; }
 
@@ -276,5 +314,82 @@ nav {
   height: 40px;
   right: 50px;
   margin-top: 30px; }
+
+.upload {
+  display: none;
+  z-index: 5;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 80; }
+  .upload form {
+    max-width: 100%;
+    width: 450px;
+    margin: 0 auto;
+    background-color: #e3e3e3;
+    text-align: center;
+    padding: 20px 30px;
+    position: relative; }
+  .upload input {
+    width: 350px;
+    max-width: 100%;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid #FF4351;
+    display: block;
+    margin: 0 auto;
+    padding: 20px;
+    transition: all 0.4s; }
+    .upload input[type="text"]:active, .upload input[type="text"]:focus {
+      outline: 0;
+      background-color: #f1f1f1; }
+    .upload input[type="submit"] {
+      width: auto;
+      margin-top: 20px;
+      border: 0;
+      background-color: #FF4351;
+      color: white;
+      padding: 15px 15px; }
+      .upload input[type="submit"]:hover {
+        background-color: #ff7680;
+        cursor: pointer; }
+
+.upload-wrapper {
+  width: 350px;
+  max-width: 100%;
+  margin: 10px auto; }
+  .upload-wrapper input[type="file"] {
+    position: absolute;
+    left: -99999px; }
+  .upload-wrapper label {
+    background-color: #FF4351;
+    padding: 15px 5px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    float: right;
+    color: #f1f1f1;
+    transition: background-color 0.4s; }
+    .upload-wrapper label:hover {
+      cursor: pointer;
+      background-color: #ff7680; }
+  .upload-wrapper input {
+    width: 70%;
+    display: inline-block;
+    padding: 15px 5px;
+    margin: 0;
+    float: left; }
+
+#fileUpload-text {
+  pointer-events: none; }
+
+#modal {
+  z-index: 1;
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5); }
 
 /*# sourceMappingURL=stylesheet.css.map */

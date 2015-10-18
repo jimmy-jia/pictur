@@ -29,6 +29,7 @@ a
 	transition: color .4s
 	&:hover
 		color: white
+		cursor: pointer
 li, ul
 	list-style: none
 	padding: 0
@@ -75,6 +76,24 @@ nav
 		&:focus, &:active
 			outline: 0
 			background-color: darken($white, 8)
+.close
+	//background-image: url(resources/icons/close.svg)
+	background-size: cover
+	width: 35px
+	height: 35px
+	position: absolute
+	top: 5px
+	right: 5px
+	svg
+		fill: #666
+		height: 35px
+		width: 35px
+		transition: fill .4s
+		&:hover
+			fill: $secondary-color
+	&:hover
+		cursor: pointer
+
 
 #main
 	padding-top: 70px
@@ -176,7 +195,7 @@ nav
 	width: 30px
 	height: 30px
 	transition: background-color .4s
-	background-image: url(up.svg)
+	background-image: url(resources/icons/up.svg)
 	background-size: cover
 	&:hover
 		cursor: pointer
@@ -187,7 +206,7 @@ nav
 .downvote
 	@extend .upvote
 	background-color: #444
-	background-image: url(down.svg)
+	background-image: url(resources/icons/down.svg)
 	&:hover
 		background-color: #555
 
@@ -276,3 +295,82 @@ nav
 	height: 40px
 	right: 50px
 	margin-top: 30px
+
+
+.upload
+	display: none
+	z-index: 5
+	position: fixed
+	left: 0
+	right: 0
+	top: 80
+	form
+		max-width: 100%
+		width: 450px
+		margin: 0 auto
+		background-color: #e3e3e3
+		text-align: center
+		padding: 20px 30px
+		position: relative
+	input
+		width: 350px
+		max-width: 100%
+		background-color: transparent
+		border: 0
+		border-bottom: 2px solid $secondary-color
+		display: block
+		margin: 0 auto
+		padding: 20px
+		transition: all .4s
+		&[type="text"]
+			&:active, &:focus
+				outline: 0
+				background-color: $white
+		
+		&[type="submit"]
+			width: auto
+			margin-top: 20px
+			border: 0
+			background-color: $secondary-color
+			color: white
+			padding: 15px 15px
+			&:hover
+				background-color: lighten($secondary-color, 10)
+				cursor: pointer
+	
+.upload-wrapper
+	width: 350px
+	max-width: 100%
+	margin: 10px auto
+	input[type="file"]
+		position: absolute
+		left: -99999px
+	label
+		background-color: $secondary-color
+		padding: 15px 5px
+		font-family: $main-font
+		font-weight: 300
+		float: right
+		color: $white
+		transition: background-color .4s
+		&:hover
+			cursor: pointer
+			background-color: lighten($secondary-color, 10)
+	input
+		width: 70%
+		display: inline-block
+		padding: 15px 5px
+		margin: 0
+		float: left
+#fileUpload-text
+	pointer-events: none
+
+#modal
+	z-index: 1
+	display: none
+	width: 100%
+	height: 100%
+	position: fixed
+	top: 0
+	left: 0
+	background-color: rgba(black, .5)
