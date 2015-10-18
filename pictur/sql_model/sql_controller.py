@@ -33,6 +33,13 @@ def select_post(pid):
     conn.close()
     return result.fetchone()
 
+def select_n_post(n):
+    post_table, conn = initialize_db_connection("Post")
+    sel = post_table.select().order_by(post_table.c.time).limit(n)
+    result = conn.execute(sel)
+    conn.close()
+    return result
+
 
 def select_comments_for_post(pid):
     comment_table, conn = initialize_db_connection("Comment")
