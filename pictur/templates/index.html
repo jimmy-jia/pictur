@@ -75,84 +75,62 @@
 					</div>
 					<div class="post-image">
 						<!--<img src="https://i.imgur.com/g77dAsa.gif"/>-->
-                        <img src="{{ image }}"/>
+						<img src="{{ image }}"/>
 					</div>
 					<div class="post-subinfo">
 						<h4 class="post-description">{{ post.description }}</h4>
 					</div>
 					<div class="post-comments">
 						<p>Comments</p>
-						<div class="comment">
+
+						{% macro childacomment(comment) %}
+						<div class="comment comment-child child-a">
 							<div class="comment-vote">
 								<button class="upvote"></button>
 								<button class="downvote"></button>
 							</div>
-							<p class="comment-author">TJ</p>
-							<p class="comment-datetime">9:34 AM 8/12/15</p>
-							<p class="comment-text">Wow thats so cute</p>
+							<p class="comment-author">{{ comment.uid }}</p>
+							<p class="comment-datetime">{{ comment.time }}</p>
+							<p class="comment-text">{{ comment.text }}</p>
 							<button class="comment-reply">reply</button>
-							<div class="comment comment-child child-a">
-								<div class="comment-vote">
-									<button class="upvote"></button>
-									<button class="downvote"></button>
-								</div>
-								<p class="comment-author">Charles</p>
-								<p class="comment-datetime">9:35 AM 8/12/15</p>
-								<p class="comment-text">I want 10 of em</p>
-								<button class="comment-reply">reply</button>
-								<div class="comment comment-child child-b">
-									<div class="comment-vote">
-										<button class="upvote"></button>
-										<button class="downvote"></button>
-									</div>
-									<p class="comment-author">Charles</p>
-									<p class="comment-datetime">9:35 AM 8/12/15</p>
-									<p class="comment-text">I want 10 of em</p>
-									<button class="comment-reply">reply</button>
-								</div>
-								<div class="comment comment-child child-b">
-									<div class="comment-vote">
-										<button class="upvote"></button>
-										<button class="downvote"></button>
-									</div>
-									<p class="comment-author">Charles</p>
-									<p class="comment-datetime">9:35 AM 8/12/15</p>
-									<p class="comment-text">I want 10 of em</p>
-									<button class="comment-reply">reply</button>
-								</div>
-							</div>
+							{% for c in comment.children %} 
+							    {{ childbcomment(c) }}
+							{% endfor %}
 						</div>
-						<div class="comment">
+						{% endmacro %}
+
+						{% macro childbcomment(comment) %}
+						<div class="comment comment-child child-b">
 							<div class="comment-vote">
 								<button class="upvote"></button>
 								<button class="downvote"></button>
 							</div>
-							<p class="comment-author">Charles</p>
-							<p class="comment-datetime">9:35 AM 8/12/15</p>
-							<p class="comment-text">I want 10 of em</p>
+							<p class="comment-author">{{ comment.uid }}</p>
+							<p class="comment-datetime">{{ comment.time }}</p>
+							<p class="comment-text">{{ comment.text }}</p>
 							<button class="comment-reply">reply</button>
+							{% for c in comment.children %} 
+							    {{ childacomment(c) }}
+							{% endfor %}
 						</div>
-						<div class="comment">
-							<div class="comment-vote">
-								<button class="upvote"></button>
-								<button class="downvote"></button>
-							</div>
-							<p class="comment-author">Robert</p>
-							<p class="comment-datetime">11:34 PM 8/13/15</p>
-							<p class="comment-text">He likes being brushed</p>
-							<button class="comment-reply">reply</button>
-						</div>
-						<div class="comment">
-							<div class="comment-vote">
-								<button class="upvote"></button>
-								<button class="downvote"></button>
-							</div>
-							<p class="comment-author">Jimmy</p>
-							<p class="comment-datetime">12:01 AM 8/25/15</p>
-							<p class="comment-text">What did the fox say???</p>
-							<button class="comment-reply">reply</button>
-						</div>
-					</div>
+						{% endmacro %}
+
+						{% for comment in comments %}
+						    <div class="comment">
+							    <div class="comment-vote">
+								    <button class="upvote"></button>
+								    <button class="downvote"></button>
+							    </div>
+							    <p class="comment-author">{{ comment.uid }}</p>
+							    <p class="comment-datetime">{{ comment.time }}</p>
+							    <p class="comment-text">{{ comment.text }}</p>
+							    <button class="comment-reply">reply</button>
+							    {% for c in comment.children %} 
+								{{ childacomment(c) }}
+							    {% endfor %}
+						    </div>
+						{% endfor %}
+
 					<div class="post-new">
 						<p>Post a comment!</p>
 						<textarea></textarea>

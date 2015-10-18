@@ -3,7 +3,7 @@ from flask import Flask, url_for, redirect, request, render_template
 import os
 from pictur.sql_model import sql_controller
 
-UPLOADS_FOLDER = '/root/pictur/pictur/static/resources/postimages/'
+UPLOADS_FOLDER = 'static/resources/postimages'
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -37,7 +37,8 @@ def image(image_id):
             file.save(os.path.join(UPLOADS_FOLDER, filename))
             return redirect(url_for('image', image_id = image_id))
     post = sql_controller.select_post(image_id)
-    response = render_template('index.html', post=post, image='static/resources/postimages/{}.gif'.format(image_id))
+    comments = sql_controller.select_comments_for_post(image_id)
+    response = render_template('index.html', post=post, comments=comments, image='{}/{}.gif'.format(UPLOADS_FOLDER, image_id))
     return response
 
 @app.route('/upload', methods=['GET', 'POST'])
