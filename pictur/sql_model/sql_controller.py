@@ -69,6 +69,12 @@ def select_comments_for_post(pid):
                     p_comment['children'].append(comment)
     return base
 
+def tag_search(tag, n):
+    post_table, conn = initialize_db_connection("Post")
+    sel = post_table.select().where(post_table.c.tags.contains(tag)).limit(n)
+    result = conn.execute(sel)
+    return result
+
 def initialize_db_connection(table_name):
     engine = create_engine("mysql+pymysql://root:4tspicturhost@localhost/pictur")
     conn = engine.connect()
@@ -76,5 +82,3 @@ def initialize_db_connection(table_name):
     meta.bind = engine
     table = Table(table_name, meta, autoload=True, autoload_with=engine)
     return table, conn
-
-
