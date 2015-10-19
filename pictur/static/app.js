@@ -27,3 +27,12 @@ function showReply(i){
 		$(i).parent().children("div.comment-reply-wrapper").remove();
 	}
 }
+function showMobileNav(){
+	for(var i=3; i<6; i++){
+		if(!$('#svg_'+i).attr('class'))
+			$('#svg_'+i).attr('class', 'svg_'+i);
+		else
+			$('#svg_'+i).removeAttr('class');
+	}
+	$('#navbar').slideToggle(400);
+}

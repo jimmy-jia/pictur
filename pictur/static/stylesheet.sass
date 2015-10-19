@@ -54,9 +54,22 @@ header
 	padding: 10px 0
 	a:first-child
 		color: $white
-		margin-left: 15px
+		margin-left: 10px
 		font-size: 2em
 		font-weight: 100
+.mobile-nav
+	display: none
+#svg_3, #svg_4, #svg_5
+	transition: all .5s
+	transform-origin: 50% 50%
+.svg_3
+	transform: rotate3d(0, 0, 1, 45deg)
+	top: 0
+.svg_5
+	transform:  translate(0, -3px) rotate3d(0, 0, 1, -45deg)
+.svg_4
+	transform:  translate(0, 3px) rotate3d(0, 0, 1, -45deg)
+	bottom: 0
 nav
 	display: inline-block
 	float: right
@@ -78,8 +91,33 @@ nav
 			outline: 0
 			background-color: lighten($white, 8)
 @media(max-width: 600px)
+	header
+		padding: 5px 0
+		a:first-child
+			font-size: 1.8em
 	nav
 		display: none
+		width: 100%
+		margin-right: 0
+		text-align: right
+		padding-bottom: 5px
+		a
+			padding-right: 3%
+		input
+			width: 95%
+			margin-bottom: 5px
+			margin-top: 5px
+	.mobile-nav
+		display: block
+		position: fixed
+		top: 0
+		right: 0
+		height: 44px
+		width: 44px
+		z-index: 2
+	#main
+		padding-top: 40px !important
+		
 .close
 	background-size: cover
 	width: 35px
@@ -161,6 +199,11 @@ nav
 		-moz-column-count: 2
 		-webkit-column-count: 2
 		column-count: 2
+	#main .post 
+		margin-top: 0
+		.post-vote
+			top: 0
+			right: 0
 @media(max-width: 375px)
 	.post-container
 		-moz-column-count: 1
@@ -392,12 +435,14 @@ nav
 			cursor: pointer
 			background-color: lighten($secondary-color, 10)
 	input
-		width: 70%
+		max-width: calc(100% - 95px)
+		width: 245px
 		display: inline-block
 		padding: 15px 5px
 		margin: 0
 		float: left
 		padding-left: 20px
+
 #fileUpload-text
 	pointer-events: none
 
