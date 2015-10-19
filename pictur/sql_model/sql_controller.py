@@ -73,10 +73,7 @@ def tag_search(tag, n):
     post_table, conn = initialize_db_connection("Post")
     sel = post_table.select().where(post_table.c.tags.contains(tag)).limit(n)
     result = conn.execute(sel)
-    ids = []
-    for post in result:
-        ids.append(post['pid'])
-    return ids
+    return result
 
 def initialize_db_connection(table_name):
     engine = create_engine("mysql+pymysql://root:4tspicturhost@localhost/pictur")
