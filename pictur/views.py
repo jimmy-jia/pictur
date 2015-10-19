@@ -55,3 +55,8 @@ def upload_file():
             file.save(os.path.join(UPLOADS_FOLDER, filename))
             return redirect(url_for('image', image_id = image_id))
     return render_template('upload.html')
+
+@app.route('/search&tag=<tag>', methods=['GET'])
+def search_comment(tag):
+    posts = sql_controller.tag_search(tag, 9)
+    return render_template('front.html', posts=posts)
