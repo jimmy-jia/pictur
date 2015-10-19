@@ -14,9 +14,9 @@
 		<span id="modal"></span>
 		<div class="wrapper">
 			<header>
-				<a href="//159.203.110.195:5000">pictur</a>
+				<a href="/">pictur</a>
 				<nav>
-					<input type="text" placeholder="search"></input>
+					<input type="text" placeholder="search" onkeypress="handleSearch(event)" id="search-box"></input>
 					<a href="">sign in</a>
 					<a href="">sign up</a>
 					<a onclick="showUpload()">upload</a>
@@ -51,17 +51,6 @@
 						<h3>Share Something!</h3>
 					</div>
 				</section>-->
-				<!--<section class="main-posts">
-					<div class="post-container">
-						<div><img src="https://i.imgur.com/g77dAsa.gif"/></div>
-						<div><img src="https://i.imgur.com/g77dAsa.gif"/></div>
-						<div><img src="https://i.imgur.com/g77dAsa.gif"/></div>
-						<div><img src="https://i.imgur.com/g77dAsa.gif"/></div>
-						<div><img src="https://i.imgur.com/g77dAsa.gif"/></div>
-						<div><img src="https://i.imgur.com/g77dAsa.gif"/></div>
-
-					</div>
-				</section>-->
 
 				<section class="post">
 					<div class="post-info">
@@ -92,7 +81,7 @@
 							<p class="comment-author">{{ comment.uid }}</p>
 							<p class="comment-datetime">{{ comment.time }}</p>
 							<p class="comment-text">{{ comment.text }}</p>
-							<button class="comment-reply">reply</button>
+							<button class="comment-reply" onclick="showReply(this)">reply</button>
 							{% for c in comment.children %} 
 							    {{ childbcomment(c) }}
 							{% endfor %}
@@ -108,7 +97,7 @@
 							<p class="comment-author">{{ comment.uid }}</p>
 							<p class="comment-datetime">{{ comment.time }}</p>
 							<p class="comment-text">{{ comment.text }}</p>
-							<button class="comment-reply">reply</button>
+							<button class="comment-reply" onclick="showReply(this)">reply</button>
 							{% for c in comment.children %} 
 							    {{ childacomment(c) }}
 							{% endfor %}
@@ -124,7 +113,7 @@
 							    <p class="comment-author">{{ comment.uid }}</p>
 							    <p class="comment-datetime">{{ comment.time }}</p>
 							    <p class="comment-text">{{ comment.text }}</p>
-							    <button class="comment-reply">reply</button>
+							    <button class="comment-reply" onclick="showReply(this)">reply</button>
 							    {% for c in comment.children %} 
 								{{ childacomment(c) }}
 							    {% endfor %}
@@ -144,22 +133,5 @@
 		<footer>
 		</footer>
 	</body>
-	<script>
-		function updateUpload(i) {
-			document.getElementById("fileUpload-text").value = i.value.replace("C:\\fakepath\\", "");
-		};
-		function showUpload(){
-			var div = $("#upload-section");
-			var modal = $("#modal");
-			if(div.is(":hidden")){
-				div.fadeIn(400);
-				modal.fadeIn(400);
-
-			} else {
-				div.fadeOut(400);
-				modal.fadeOut(400);
-			}
-		}
-
-	</script>
+	<script src="/static/app.js"></script>
 </html>

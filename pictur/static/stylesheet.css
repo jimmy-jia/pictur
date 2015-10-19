@@ -40,6 +40,9 @@ h3 {
   margin: 0;
   padding: 0; }
 
+button:focus, button:active {
+  outline: 0; }
+
 header {
   position: fixed;
   width: 100%;
@@ -73,6 +76,9 @@ nav {
       outline: 0;
       background-color: white; }
 
+@media(max-width: 600px) {
+  nav {
+    display: none; } }
 .close {
   background-size: cover;
   width: 35px;
@@ -293,6 +299,15 @@ nav {
     display: block;
     width: 20px;
     height: 20px; }
+
+.comment-reply-wrapper {
+  margin-left: 30px; }
+  .comment-reply-wrapper textarea {
+    width: 300px;
+    height: 100px;
+    margin-top: 5px; }
+  .comment-reply-wrapper .post-button {
+    position: static; }
 
 .post-new {
   margin-bottom: 30px;
