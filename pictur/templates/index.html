@@ -53,14 +53,6 @@
 					</form>
 				</section>
 
-
-				<!--<section class="home">
-					<div class="banner">
-						<h1>pictur</h1>
-						<h3>Share Something!</h3>
-					</div>
-				</section>-->
-
 				<section class="post">
 					<div class="post-info">
 						<h1 class="post-title">{{ post.title }}</h1>
@@ -72,11 +64,15 @@
 						<button class="downvote"></button>
 					</div>
 					<div class="post-image">
-						<!--<img src="https://i.imgur.com/g77dAsa.gif"/>-->
 						<img src="{{ image }}"/>
 					</div>
 					<div class="post-subinfo">
 						<h4 class="post-description">{{ post.description }}</h4>
+						
+						<!-- TAGS GO HERE -->
+						for every tag
+						<a href="/search?tag={{tag}}>{{tag}}"></a>
+						
 					</div>
 					<div class="post-comments">
 						<p>Comments</p>

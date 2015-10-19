@@ -15,12 +15,12 @@ function showUpload(){
 function handleSearch(event){
 	if(event.keyCode === 13){
 		console.log($("#search-box"));
-		window.location.href = "http://pictur.ml:2086/search/tags/"+$("#search-box")[0].value;
+		window.location.href = "http://pictur.ml:2086/search?tag="+$("#search-box")[0].value;
 	}
 	return false;
 }
 function showReply(i){
-	if($(i).parent().has("div.comment-reply-wrapper").length == 0){
+	if($(i).parent().has("> div.comment-reply-wrapper").length == 0){
 		$('<div class="comment-reply-wrapper"><form><textarea></textarea><button class="post-button">Post</button></form></div>').insertAfter($(i).parent().children("p.comment-text"));
 	}
 	else{

@@ -352,13 +352,19 @@ nav {
     height: 20px; }
 
 .comment-reply-wrapper {
-  margin-left: 30px; }
+  margin-left: 30px;
+  margin-top: 5px; }
   .comment-reply-wrapper textarea {
     width: 300px;
-    height: 100px;
-    margin-top: 5px; }
+    height: 100px; }
+    .comment-reply-wrapper textarea:active, .comment-reply-wrapper textarea:focus {
+      outline: none; }
   .comment-reply-wrapper .post-button {
-    position: static; }
+    position: static;
+    vertical-align: bottom;
+    margin-top: 0;
+    margin-bottom: 4px;
+    margin-left: 5px; }
 
 .post-new {
   margin-bottom: 30px;
