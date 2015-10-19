@@ -71,10 +71,10 @@ def select_comments_for_post(pid):
 
 def tag_search(tag, n):
     post_table, conn = initialize_db_connection("Post")
-    result = conn.query(post_table).filter(post_table.tags.like('%' + tag + '%')).limit(n)
+    sel = post_table.select().where(post_table.c.tags.contains(tag)).limit(n)
     ids = []
-    for post in result:
-        ids.append(result['pid'])
+    for post in sel:
+        ids.append(post['pid'])
     return ids
 
 def initialize_db_connection(table_name):
