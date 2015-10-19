@@ -58,8 +58,8 @@ def upload_file():
 
 @app.route('/search', methods=['GET'])
 def search_comment():
-    tag = request.attr.get('tag')
+    tag = request.args.get('tag')
     if tag != None and tag != '':
         posts = sql_controller.tag_search(tag, 9)
         return render_template('front.html', posts=posts)
-    return redirect(url_for('', posts = []))
+    return render_template('front.html', posts=[])
