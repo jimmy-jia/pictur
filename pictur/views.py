@@ -56,7 +56,10 @@ def upload_file():
             return redirect(url_for('image', image_id = image_id))
     return render_template('upload.html')
 
-@app.route('/search/tags/<tag>', methods=['GET'])
-def search_comment(tag):
-    posts = sql_controller.tag_search(tag, 9)
-    return render_template('front.html', posts=posts)
+@app.route('/search', methods=['GET'])
+def search_comment():
+    tag = request.attr.get('tag')
+    if tag != None and tag != '':
+        posts = sql_controller.tag_search(tag, 9)
+        return render_template('front.html', posts=posts)
+    return redirect(url_for('', posts = []))
