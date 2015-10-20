@@ -232,7 +232,7 @@ nav
 	padding: 15px 25px
 	background-color: #ddd
 	.post-title
-		font-family: $secondary-color
+		//font-family: $main-font
 		font-size: 1.5em
 	.post-datetime, .post-author
 		display: inline-block
@@ -246,6 +246,16 @@ nav
 	font-family: $main-font
 	padding: 20px 30px
 	font-weight: 300
+.post-tags
+	height: 40px
+	padding: 10px 30px
+	background-color: #cfcfcf
+	a, p
+		display: inline-block
+	a
+		color: #212121
+		&:hover
+			color: $secondary-color
 
 .post-vote
 	position: absolute
@@ -299,6 +309,9 @@ nav
 		padding-left: 30px
 		border-left: 8px solid $secondary-color
 		background-color: $white
+	a
+		&:hover
+			color: $secondary-color
 .comment-author, .comment-datetime
 	display: inline-block
 .comment-author
@@ -351,7 +364,6 @@ nav
 		margin-bottom: 4px
 		margin-left: 5px
 		
-		
 .post-new
 	margin-bottom: 30px
 	padding-bottom: 100px
@@ -376,8 +388,37 @@ nav
 	height: 40px
 	right: 50px
 	margin-top: 30px
-
-
+.delete-post
+	right: 0
+	margin-top: 0
+	&:hover
+		background-color: #ff1111
+.comment-edit-form
+	textarea
+		height: 80px
+		max-width: 90%
+		width: 300px
+		padding: 5px
+		&:active, &:focus
+			outline: 0
+	button
+		right: auto
+		margin-top: 40px
+.delete-comment-form
+	display: inline-block
+.delete-comment
+	background: 0
+	border: 0
+	font-family: $main-font
+	display: inline-block
+	transition: color .4s
+	font-size: 1em
+	color: $main-color
+	height: 19px
+	padding: 0
+	&:hover
+		cursor: pointer
+		color: $secondary-color
 .upload
 	display: none
 	z-index: 5
@@ -393,7 +434,8 @@ nav
 		text-align: center
 		padding: 20px 30px
 		position: relative
-	input
+	input, textarea
+		font-family: $main-font
 		width: 350px
 		max-width: 100%
 		background-color: transparent
@@ -403,25 +445,28 @@ nav
 		margin: 0 auto
 		padding: 20px
 		transition: all .4s
-		&[type="text"]
-			&:active, &:focus
-				outline: 0
-				background-color: $white
+		&:active, &:focus
+			outline: 0
+			background-color: $white
 		
-		&[type="submit"]
-			width: auto
-			margin-top: 20px
-			border: 0
-			background-color: $secondary-color
-			color: white
-			padding: 15px 15px
-			font-family: $main-font
-			font-weight: 300
-			&:hover
-				background-color: lighten($secondary-color, 10)
-				cursor: pointer
-			&:focus, &:active
-				outline: none
+	button
+		max-width: 100%
+		display: block
+		margin: 0 auto
+		width: auto
+		margin-top: 20px
+		border: 0
+		background-color: $secondary-color
+		color: white
+		padding: 15px 15px
+		font-family: $main-font
+		font-weight: 300
+		transition: background-color .4s
+		&:hover
+			background-color: lighten($secondary-color, 10)
+			cursor: pointer
+		&:focus, &:active
+			outline: none
 	
 .upload-wrapper
 	width: 350px

@@ -16,7 +16,7 @@ def insert_comment(pid, uid, description, pcid):
 
 def update_comment(cid, description):
     comment_table, conn = initialize_db_connection("Comment")
-    upd = comment_table.update().where(comeent_table.c.cid==cid).values(text=description)
+    upd = comment_table.update().where(comment_table.c.cid==cid).values(text=description)
     conn.execute(upd)
     conn.close()
 
@@ -41,10 +41,22 @@ def select_post(pid):
 def select_n_post(n):
     post_table, conn = initialize_db_connection("Post")
     sel = post_table.select().order_by(post_table.c.time).limit(n)
-    result = conn.execute(sel)
+    result = reversed(conn.execute(sel).fetchall() )
     conn.close()
     return result
 
+def select_n_post_offset(n, offset):
+    post_table, conn = initialize_db_connection("Post")
+    sel = post_table.select().order_by(post_table.c.time)
+    result = list(reversed(conn.execute(sel).fetchall() ))
+    conn.close()
+    if n > len(result):
+        offset, n = 0, len(result)
+    elif n+offset > len(result):
+        offset = len(result)-n
+    elif offset < 0:
+        offset = 0
+    return result[offset:offset+n]
 
 def select_comments_for_post(pid):
     comment_table, conn = initialize_db_connection("Comment")

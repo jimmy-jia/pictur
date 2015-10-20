@@ -17,6 +17,16 @@ def process_upload(request, uid):
         file.save(os.path.join(UPLOADS_FOLDER, filename))
         return image_id
     return 0
+    
+def process_comment(request, uid, pid):
+    pcid = request.form['parentcid']
+    content = request.form['content']
+    sql_controller.insert_comment(pid, uid, content, pcid)
+    
+def edit_comment(request):
+    cid = request.form['cid']
+    content = request.form['content']
+    sql_controller.update_comment(cid, content)
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -24,18 +34,31 @@ def index():
     if request.method == 'POST' and UPLOADS_FOLDER is not '':
         image_id = process_upload(request, 0) # get a real user later
         return redirect(url_for('image', image_id = image_id))
-    n_to_display = 9
-    posts = sql_controller.select_n_post(n_to_display)
+    n_to_display = 25
+    page = int(request.args.get('page', default = '1'))-1
+    posts = sql_controller.select_n_post_offset(n_to_display, n_to_display*page)
     return render_template('front.html', posts = posts)
 	
 @app.route('/i<image_id>', methods=['GET', 'POST'])
 def image(image_id):
     if request.method == 'POST' and UPLOADS_FOLDER is not '':
-        image_id = process_upload(request, 0) # get a real user later
-        return redirect(url_for('image', image_id = image_id))
+        source = request.form['source']
+        if source == 'post':
+            image_id = process_upload(request, 0) # get a real user later
+            return redirect(url_for('image', image_id = image_id))
+        elif source == 'comment':
+            process_comment(request, 0, image_id)
+            return redirect(url_for('image', image_id = image_id))
+        elif source == 'commentedit':
+            edit_comment(request)
+            return redirect(url_for('image', image_id = image_id))
+        elif source == 'deletepost':
+            sql_controller.delete_post(image_id)
+            return redirect(url_for('index'))
     post = sql_controller.select_post(image_id)
     comments = sql_controller.select_comments_for_post(image_id)
-    response = render_template('index.html', post=post, comments=comments, image='{}/{}.gif'.format(RELATIVE_FOLDER, image_id))
+    tags = post['tags'].split(",")
+    response = render_template('index.html', post=post, tags=tags, comments=comments, image='{}/{}.gif'.format(RELATIVE_FOLDER, image_id))
     return response
 
 @app.route('/search', methods=['GET', 'POST'])

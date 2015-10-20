@@ -240,7 +240,6 @@ nav {
   padding: 15px 25px;
   background-color: #ddd; }
   .post-info .post-title {
-    font-family: #FF4351;
     font-size: 1.5em; }
   .post-info .post-datetime, .post-info .post-author {
     display: inline-block;
@@ -255,6 +254,17 @@ nav {
   font-family: "Roboto", sans-serif;
   padding: 20px 30px;
   font-weight: 300; }
+
+.post-tags {
+  height: 40px;
+  padding: 10px 30px;
+  background-color: #cfcfcf; }
+  .post-tags a, .post-tags p {
+    display: inline-block; }
+  .post-tags a {
+    color: #212121; }
+    .post-tags a:hover {
+      color: #FF4351; }
 
 .post-vote {
   position: absolute;
@@ -306,6 +316,8 @@ nav {
     padding-left: 30px;
     border-left: 8px solid #FF4351;
     background-color: #f1f1f1; }
+  .comment a:hover {
+    color: #FF4351; }
 
 .comment-author, .comment-datetime {
   display: inline-block; }
@@ -391,6 +403,40 @@ nav {
   right: 50px;
   margin-top: 30px; }
 
+.delete-post {
+  right: 0;
+  margin-top: 0; }
+  .delete-post:hover {
+    background-color: #ff1111; }
+
+.comment-edit-form textarea {
+  height: 80px;
+  max-width: 90%;
+  width: 300px;
+  padding: 5px; }
+  .comment-edit-form textarea:active, .comment-edit-form textarea:focus {
+    outline: 0; }
+.comment-edit-form button {
+  right: auto;
+  margin-top: 40px; }
+
+.delete-comment-form {
+  display: inline-block; }
+
+.delete-comment {
+  background: 0;
+  border: 0;
+  font-family: "Roboto", sans-serif;
+  display: inline-block;
+  transition: color 0.4s;
+  font-size: 1em;
+  color: #2c3e50;
+  height: 19px;
+  padding: 0; }
+  .delete-comment:hover {
+    cursor: pointer;
+    color: #FF4351; }
+
 .upload {
   display: none;
   z-index: 5;
@@ -406,7 +452,8 @@ nav {
     text-align: center;
     padding: 20px 30px;
     position: relative; }
-  .upload input {
+  .upload input, .upload textarea {
+    font-family: "Roboto", sans-serif;
     width: 350px;
     max-width: 100%;
     background-color: transparent;
@@ -416,23 +463,27 @@ nav {
     margin: 0 auto;
     padding: 20px;
     transition: all 0.4s; }
-    .upload input[type="text"]:active, .upload input[type="text"]:focus {
+    .upload input:active, .upload input:focus, .upload textarea:active, .upload textarea:focus {
       outline: 0;
       background-color: #f1f1f1; }
-    .upload input[type="submit"] {
-      width: auto;
-      margin-top: 20px;
-      border: 0;
-      background-color: #FF4351;
-      color: white;
-      padding: 15px 15px;
-      font-family: "Roboto", sans-serif;
-      font-weight: 300; }
-      .upload input[type="submit"]:hover {
-        background-color: #ff7680;
-        cursor: pointer; }
-      .upload input[type="submit"]:focus, .upload input[type="submit"]:active {
-        outline: none; }
+  .upload button {
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+    width: auto;
+    margin-top: 20px;
+    border: 0;
+    background-color: #FF4351;
+    color: white;
+    padding: 15px 15px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    transition: background-color 0.4s; }
+    .upload button:hover {
+      background-color: #ff7680;
+      cursor: pointer; }
+    .upload button:focus, .upload button:active {
+      outline: none; }
 
 .upload-wrapper {
   width: 350px;

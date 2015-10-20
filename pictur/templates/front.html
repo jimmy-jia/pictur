@@ -47,10 +47,10 @@
 							<label for="fileupload">Choose File</label>
 							<input type=file name=file id="fileupload" onchange="updateUpload(this)"/>
 						</div>
-						<input type="text" name=tags placeholder="tags"/>
-						<input type="text" name=title placeholder="title"/>
-						<input type="text" name=description placeholder="description"/>
-						<input type=submit value="Upload" placeholder="upload"/>
+						<input required type="text" name=title placeholder="title"/>
+						<textarea required name=description placeholder="description"></textarea>
+						<input required type="text" name=tags placeholder="tags"/>
+						<button type=submit value="post" name="source">Upload</button>
 					</form>
 				</section>
 
