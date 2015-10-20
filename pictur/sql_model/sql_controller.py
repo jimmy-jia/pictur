@@ -61,7 +61,7 @@ def select_comments_for_post(pid):
     base = []
     change = 1
     for comment in comments:
-        if comment['parent_cid'] is None:
+        if comment['parent_cid'] is None or comment['parent_cid'] == 0:
             base.append(comment)
         else:
             for p_comment in comments:
