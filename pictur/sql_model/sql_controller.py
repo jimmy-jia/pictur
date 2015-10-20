@@ -22,12 +22,12 @@ def update_comment(cid, description):
 
 def delete_post(pid):
     post_table, conn = initialize_db_connection("Post")
-    del_post = post_table.delete().where(pid==pid)
+    del_post = post_table.delete().where(post_table.c.pid==pid)
     conn.execute(del_post)
     conn.close()
     
     comment_table, conn = initialize_db_connection("Comment")
-    del_comments = comment_table.delete().where(post_pid==pid)
+    del_comments = comment_table.delete().where(comment_table.c.post_pid==pid)
     conn.execute(del_comments)
     conn.close()
 
