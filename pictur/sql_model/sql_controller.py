@@ -16,14 +16,19 @@ def insert_comment(pid, uid, description, pcid):
 
 def update_comment(cid, description):
     comment_table, conn = initialize_db_connection("Comment")
-    upd = comment_table.update().values(cid=cid, text=description)
+    upd = comment_table.update().where(comeent_table.c.cid==cid).values(text=description)
     conn.execute(upd)
     conn.close()
 
-def delete_comment(cid):
+def delete_post(pid):
+    post_table, conn = initialize_db_connection("Post")
+    del_post = post_table.delete().where(post_table.c.pid==pid)
+    conn.execute(del_post)
+    conn.close()
+    
     comment_table, conn = initialize_db_connection("Comment")
-    upd = comment_table.delete().values(cid=cid)
-    conn.execute(upd)
+    del_comments = comment_table.delete().where(comment_table.c.post_pid==pid)
+    conn.execute(del_comments)
     conn.close()
 
 def select_post(pid):
