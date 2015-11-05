@@ -507,3 +507,55 @@ nav
 	top: 0
 	left: 0
 	background-color: rgba(black, .5)
+	
+.login
+	position: fixed
+	margin: 0 auto
+	left: 0
+	right: 0
+	z-index: 5
+	top: 100px
+	padding: 30px
+	max-width: 100%
+	width: 300px
+	text-align: center
+	background-color: rgba(black, .6)
+	h1
+		margin-bottom: 10px
+		color: white
+	form
+		input
+			display: block
+			margin: 0 auto
+			padding: 10px
+			margin-bottom: 10px
+			border: 0
+			transition: background-color .4s
+			background-color: transparent
+			border-bottom: 1px solid $secondary-color
+			color: $white
+			&:active, &:focus
+				outline: 0
+				background-color: white
+				color: black
+		
+		button
+			background-color: $secondary-color
+			border: 0
+			padding: 13px
+			color: $white
+			transition: background-color .4s
+			&:hover
+				background-color: lighten($secondary-color, 10)
+				cursor: pointer
+				
+.next-page-button
+	@extend .post-button
+	position: static
+	width: auto
+	margin: 0 auto
+	display: block
+	margin-bottom: 35px
+	font-size: 1.5em
+	padding: 20px
+	height: auto

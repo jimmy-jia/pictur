@@ -272,7 +272,7 @@ nav {
   right: 12px;
   padding: 8px; }
 
-.upvote, .downvote, .post-button {
+.upvote, .downvote, .post-button, .next-page-button {
   background-color: #FF4351;
   border: 0;
   color: white;
@@ -281,10 +281,10 @@ nav {
   transition: background-color 0.4s;
   background-image: url(resources/icons/up.svg);
   background-size: cover; }
-  .upvote:hover, .downvote:hover, .post-button:hover {
+  .upvote:hover, .downvote:hover, .post-button:hover, .next-page-button:hover {
     cursor: pointer;
     background-color: #ff7680; }
-  .upvote:active, .downvote:active, .post-button:active, .upvote:focus, .downvote:focus, .post-button:focus {
+  .upvote:active, .downvote:active, .post-button:active, .next-page-button:active, .upvote:focus, .downvote:focus, .post-button:focus, .next-page-button:focus {
     outline: 0; }
 
 .downvote {
@@ -371,7 +371,7 @@ nav {
     height: 100px; }
     .comment-reply-wrapper textarea:active, .comment-reply-wrapper textarea:focus {
       outline: none; }
-  .comment-reply-wrapper .post-button {
+  .comment-reply-wrapper .post-button, .comment-reply-wrapper .next-page-button {
     position: static;
     vertical-align: bottom;
     margin-top: 0;
@@ -395,7 +395,7 @@ nav {
     .post-new textarea:focus, .post-new textarea:active {
       outline: 2px solid rgba(255, 67, 81, 0.5); }
 
-.post-button {
+.post-button, .next-page-button {
   background-image: none;
   width: 60px;
   position: absolute;
@@ -524,5 +524,54 @@ nav {
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5); }
+
+.login {
+  position: fixed;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  top: 100px;
+  padding: 30px;
+  max-width: 100%;
+  width: 300px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6); }
+  .login h1 {
+    margin-bottom: 10px;
+    color: white; }
+  .login form input {
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 0;
+    transition: background-color 0.4s;
+    background-color: transparent;
+    border-bottom: 1px solid #FF4351;
+    color: #f1f1f1; }
+    .login form input:active, .login form input:focus {
+      outline: 0;
+      background-color: white;
+      color: black; }
+  .login form button {
+    background-color: #FF4351;
+    border: 0;
+    padding: 13px;
+    color: #f1f1f1;
+    transition: background-color 0.4s; }
+    .login form button:hover {
+      background-color: #ff7680;
+      cursor: pointer; }
+
+.next-page-button {
+  position: static;
+  width: auto;
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 35px;
+  font-size: 1.5em;
+  padding: 20px;
+  height: auto; }
 
 /*# sourceMappingURL=stylesheet.css.map */
