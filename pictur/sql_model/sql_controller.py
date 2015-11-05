@@ -1,6 +1,19 @@
 from sqlalchemy import Table, Column, Integer, String, MetaData, ForeignKey, create_engine
 
-#INSERT INTO Post (tags, uid, description, likes, title) VALUES (tags, uid, description, 0, title)
+def get_user_by_email(google_email):
+    user_table, conn = initialize_db_connection("User")
+    sel = user_table.select().where(user_table.c.email==google_email)
+    result = conn.execute(sel)
+    conn.close()
+    return result.fetchone()
+    
+def get_user_by_uid(uid):
+    user_table, conn = initialize_db_connection("User")
+    sel = user_table.select().where(user_table.c.uid==uid)
+    result = conn.execute(sel)
+    conn.close()
+    return result.fetchone()
+
 def insert_post(tags, uid, description, title):
     post_table, conn = initialize_db_connection("Post")
     ins = post_table.insert().values(tags=tags, uid=uid, description=description, likes=0, title=title)
@@ -8,7 +21,6 @@ def insert_post(tags, uid, description, title):
     conn.close()
     return result.inserted_primary_key
 
-#INSERT INTO Comment (likes, uid, parent_cid, text, post_pid) VALUES (0, uid, pcid, description, pid)
 def insert_comment(pid, uid, description, pcid):
     comment_table, conn = initialize_db_connection("Comment")
     ins = comment_table.insert().values(likes=0, uid=uid, parent_cid=pcid, text=description, post_pid=pid)
@@ -16,15 +28,12 @@ def insert_comment(pid, uid, description, pcid):
     conn.close()
     return result.inserted_primary_key
 
-#UPDATE Comment SET text=description WHERE cid=cid
 def update_comment(cid, description):
     comment_table, conn = initialize_db_connection("Comment")
-    upd = comment_table.update().where(comment_table.c.cid==cid).values(text=description)
+    upd = comment_table.update().where(comeent_table.c.cid==cid).values(text=description)
     conn.execute(upd)
     conn.close()
 
-#DELETE FROM Post WHERE pid=pid
-#DELETE FROM Comment WHERE post_pid=pid
 def delete_post(pid):
     post_table, conn = initialize_db_connection("Post")
     del_post = post_table.delete().where(post_table.c.pid==pid)
@@ -36,7 +45,6 @@ def delete_post(pid):
     conn.execute(del_comments)
     conn.close()
 
-#SELECT * FROM Post WHERE pid=pid
 def select_post(pid):
     post_table, conn = initialize_db_connection("Post")
     sel = post_table.select().where(post_table.c.pid==pid)
@@ -44,7 +52,6 @@ def select_post(pid):
     conn.close()
     return result.fetchone()
 
-#SELECT * FROM Post ORDER BY time LIMIT n
 def select_n_post(n):
     post_table, conn = initialize_db_connection("Post")
     sel = post_table.select().order_by(post_table.c.time).limit(n)
@@ -65,7 +72,6 @@ def select_n_post_offset(n, offset):
         offset = 0
     return result[offset:offset+n]
 
-#SELECT * FROM Comment WHERE post_pid=pid
 def select_comments_for_post(pid):
     comment_table, conn = initialize_db_connection("Comment")
     sel = comment_table.select().where(comment_table.c.post_pid==pid)
@@ -94,7 +100,6 @@ def select_comments_for_post(pid):
                     p_comment['children'].append(comment)
     return base
 
-#SELECT * FROM Post WHERE tags LIKE '%tag%' LIMIT n
 def tag_search(tag, n):
     post_table, conn = initialize_db_connection("Post")
     sel = post_table.select().where(post_table.c.tags.contains(tag)).limit(n)
