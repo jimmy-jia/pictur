@@ -27,12 +27,21 @@
 				</a>
 				<nav id="navbar">
 					<input type="text" placeholder="search" onkeypress="handleSearch(event)" id="search-box"></input>
-					<a onclick="showSignIn()">sign in</a>
-					<a href="">sign up</a>
+                    {% if page_context['username'] %}
+                    logout
+                    {% else %}
+					<a onclick="showSignIn('{{ page_context['google_url'] }}')">sign in</a>
+					<a href="signup">sign up</a>
+                    {% endif %}
 					<a onclick="showUpload()">upload</a>
 				</nav>
 			</header>
 			<div id="main">
+				<div class="preload">
+					<img src="static/resources/icons/btn_google_signin_dark_pressed_web.png"/>
+					<img src="static/resources/icons/btn_google_signin_dark_focus_web.png"/>
+					<img src="static/resources/icons/btn_google_signin_dark_normal_web.png"/>
+				</div>
 				<section class="upload" id="upload-section">
 					<form action="" method=post enctype=multipart/form-data>
 						<span onclick="showUpload()" class="close">
@@ -55,17 +64,17 @@
 				</section>
 
 
-				<section class="home">
+				<!--<section class="home">
 					<div class="banner">
 						<h1>pictur</h1>
 						<h3>Share Something!</h3>
 					</div>
-				</section>
+				</section>-->
 				<section class="main-posts">
 					<div class="post-container">
                         {% for post in posts %}
 						<div><a href="i{{ post['pid'] }}" >
-                            <img src="static/resources/postimages/{{ post['pid'] }}.gif"/>
+                            <img src="{{ page_context['id_to_path'](post['pid'])|thumbnail('240x240') }}"/>
                         </a></div>
                         {% endfor %}
 					</div>

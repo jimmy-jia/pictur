@@ -85,6 +85,7 @@ def select_comments_for_post(pid):
         reformat['text'] = comment[comment_table.c.text]
         reformat['time'] = comment[comment_table.c.time]
         reformat['uid'] = comment[comment_table.c.uid]
+        reformat['uname'] = get_user_by_uid(comment[comment_table.c.uid])['nickname']
         reformat['parent_cid'] = comment[comment_table.c.parent_cid]
         reformat['post_pid'] = comment[comment_table.c.post_pid]
         reformat['children'] = []

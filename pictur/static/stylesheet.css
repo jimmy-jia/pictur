@@ -141,6 +141,72 @@ nav {
   .close:hover {
     cursor: pointer; }
 
+.google-signin-link {
+  border: 0; }
+
+.google-signin-button {
+  border: 0;
+  background-image: url(resources/icons/btn_google_signin_dark_normal_web.png);
+  height: 46px;
+  width: 191px;
+  transition: background-image 0.4s; }
+  .google-signin-button:focus {
+    background-image: url(resources/icons/btn_google_signin_dark_focus_web.png); }
+  .google-signin-button:hover {
+    background-image: url(resources/icons/btn_google_signin_dark_pressed_web.png); }
+
+.preload {
+  display: none; }
+
+.signup-page {
+  max-width: 100%;
+  width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #e5e5e5;
+  margin-top: 50px;
+  position: relative; }
+  .signup-page h1 {
+    color: #FF4351;
+    font-size: 2.6em; }
+  .signup-page p {
+    font-family: "Lato";
+    font-size: 1.2em;
+    margin-top: 20px; }
+  .signup-page a {
+    margin-top: 22px;
+    display: inline-block; }
+  .signup-page input {
+    margin-top: 40px;
+    padding: 14px;
+    font-size: 1.5em;
+    background-color: #f1f1f1;
+    transition: background-color 0.4s;
+    border: 0;
+    border-bottom: 4px solid #FF4351;
+    display: block; }
+  .signup-page label {
+    font-family: "Roboto", sans-serif;
+    margin-top: -45px;
+    padding: 5px 10px;
+    left: 30px;
+    position: absolute;
+    transition: margin 0.4s, background-color 0.4s, color 0.4s;
+    pointer-events: none;
+    width: auto; }
+  .signup-page input:active + label, .signup-page input:focus + label {
+    margin-top: -90px;
+    background-color: #FF4351;
+    color: white; }
+  .signup-page input:active, .signup-page input:focus {
+    outline: 0;
+    background-color: #fff; }
+  .signup-page button {
+    text-align: left;
+    margin: 0 !important;
+    transform: scale(0.5);
+    transform-origin: left; }
+
 #main {
   padding-top: 50px; }
 
@@ -272,7 +338,7 @@ nav {
   right: 12px;
   padding: 8px; }
 
-.upvote, .downvote, .post-button, .next-page-button {
+.upvote, .downvote, .post-button, .next-page-button, .signup-page button {
   background-color: #FF4351;
   border: 0;
   color: white;
@@ -281,10 +347,10 @@ nav {
   transition: background-color 0.4s;
   background-image: url(resources/icons/up.svg);
   background-size: cover; }
-  .upvote:hover, .downvote:hover, .post-button:hover, .next-page-button:hover {
+  .upvote:hover, .downvote:hover, .post-button:hover, .next-page-button:hover, .signup-page button:hover {
     cursor: pointer;
     background-color: #ff7680; }
-  .upvote:active, .downvote:active, .post-button:active, .next-page-button:active, .upvote:focus, .downvote:focus, .post-button:focus, .next-page-button:focus {
+  .upvote:active, .downvote:active, .post-button:active, .next-page-button:active, .signup-page button:active, .upvote:focus, .downvote:focus, .post-button:focus, .next-page-button:focus, .signup-page button:focus {
     outline: 0; }
 
 .downvote {
@@ -371,7 +437,7 @@ nav {
     height: 100px; }
     .comment-reply-wrapper textarea:active, .comment-reply-wrapper textarea:focus {
       outline: none; }
-  .comment-reply-wrapper .post-button, .comment-reply-wrapper .next-page-button {
+  .comment-reply-wrapper .post-button, .comment-reply-wrapper .next-page-button, .comment-reply-wrapper .signup-page button, .signup-page .comment-reply-wrapper button {
     position: static;
     vertical-align: bottom;
     margin-top: 0;
@@ -395,7 +461,7 @@ nav {
     .post-new textarea:focus, .post-new textarea:active {
       outline: 2px solid rgba(255, 67, 81, 0.5); }
 
-.post-button, .next-page-button {
+.post-button, .next-page-button, .signup-page button {
   background-image: none;
   width: 60px;
   position: absolute;
@@ -564,7 +630,7 @@ nav {
       background-color: #ff7680;
       cursor: pointer; }
 
-.next-page-button {
+.next-page-button, .signup-page button {
   position: static;
   width: auto;
   margin: 0 auto;

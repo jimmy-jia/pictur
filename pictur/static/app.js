@@ -37,20 +37,21 @@ function showMobileNav(){
 	}
 	$('#navbar').slideToggle(400);
 }
-function showSignIn(){
+function showSignIn(google_url){
 	var div = $('<div class="login">' +
-					'<h1>Log In</h1>' +
+					//'<h1>Log In</h1>' +
 					'<span onclick="showSignIn()" class="close">' +
 						'<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">' +
 						    '<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>' +
 						    '<path d="M0 0h24v24H0z" fill="none"/>' +
 						'</svg>' +
 					'</span>' +
-					'<form>' +
+					/*'<form>' +
 						'<input required type="text" name=user placeholder="username"/>' +
 						'<input required type="password" name=password placeholder="password"/>' +
 						'<button type=submit value="login" name="source">Log In</button>' +
-					'</form>' +
+					'</form>' +*/
+                    '<a class="google-signin-link" href=\'' + google_url + '\'><img class="google-signin-button" src="static/resources/transparent.gif"/></a>' + 
 				'</div>');
 	var modal = $("#modal");
 	if(modal.is(":hidden") || $("#upload-section").is(":visible")){
@@ -69,7 +70,7 @@ function editComment(i){
 			'<input type="hidden" name="cid" value="'+$(i).parent()[0].attributes["data-commentid"].value+'"></input>' +
 			'<textarea required title="Please enter a something!" name="content">'+$(i).parent().children("p.comment-text")[0].innerText+'</textarea>' +
 			'<button type="submit" name="source" value="commentedit" class="post-button">Post</button>' +
-			'</form>').insertAfter($(i).parent().children(".comment-datetime"));
+		'</form>').insertAfter($(i).parent().children(".comment-datetime"));
 	}
 	else{
 		$(i).parent().children(".comment-edit-form").remove();

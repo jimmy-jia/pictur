@@ -26,7 +26,7 @@
 				</a>
 				<nav id="navbar">
 					<input type="text" placeholder="search" onkeypress="handleSearch(event)" id="search-box"></input>
-					<a href="">sign in</a>
+					<a onclick="showSignIn('{{ page_context['google_url'] }}')">sign in</a>
 					<a href="">sign up</a>
 					<a onclick="showUpload()">upload</a>
 				</nav>
@@ -56,7 +56,7 @@
 				<section class="post">
 					<div class="post-info">
 						<h1 class="post-title">{{ post.title }}</h1>
-						<h3 class="post-author">Posted by: {{ post.nickname }}</h3>
+						<h3 class="post-author">Posted by: {{ page_context.nickname }}</h3>
 						<h3 class="post-datetime">at {{ post.time }}</h3>
 					</div>
 					<div class="post-vote">
@@ -87,7 +87,7 @@
 								<button class="upvote"></button>
 								<button class="downvote"></button>
 							</div>
-							<p class="comment-author">{{ comment.uid }}</p>
+							<p class="comment-author">{{ comment.uname }}</p>
 							<p class="comment-datetime">{{ comment.time }}</p>
 							<p class="comment-text">{{ comment.text }}</p>
 							<a onclick="editComment(this)">edit</a>
@@ -110,7 +110,7 @@
 								<button class="upvote"></button>
 								<button class="downvote"></button>
 							</div>
-							<p class="comment-author">{{ comment.uid }}</p>
+							<p class="comment-author">{{ comment.uname }}</p>
 							<p class="comment-datetime">{{ comment.time }}</p>
 							<p class="comment-text">{{ comment.text }}</p>
 							<a onclick="editComment(this)">edit</a>
@@ -133,7 +133,7 @@
 								    <button class="upvote"></button>
 								    <button class="downvote"></button>
 							    </div>
-							    <p class="comment-author">{{ comment.uid }}</p>
+                                <p class="comment-author">{{ comment.uname }}</p>
 							    <p class="comment-datetime">{{ comment.time }}</p>
 							    <p class="comment-text">{{ comment.text }}</p>
 								<a onclick="editComment(this)">edit</a>
