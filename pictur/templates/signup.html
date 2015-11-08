@@ -14,18 +14,20 @@
 		<span id="modal"></span>
 		<div class="wrapper">
 			<section class="signup-page">
+                {% if page_context['from_google'] == 0 %}
 				<h1>Welcome to Pictur!</h1>
 				<p>Click below to start your sign up through Google!</p>
-				<a class="google-signin-link" href=""><img class="google-signin-button" src="static/resources/transparent.gif"/></a>
-				<br>
+				<a class="google-signin-link" href="{{ page_context['google_url'] }}"><img class="google-signin-button" src="static/resources/transparent.gif"/></a>
+				{% else %}
 				<h1>Hi Person.First Person.Last!</h1>
 				<p>Thanks for signing up with Pictur!</p>
 				<p>Please choose a username to display on the site</p>
-				<form>
-					<input id="signup-name" type="text"></input>
-					<label for="signup-name">Username</label>
-					<button type="submit">Lets Go!</button>
+				<form method=post action="">
+					<input required name=signup-name id="signup" type="text"></input>
+					<label for="signup">Username</label>
+					<button type="submit" value="post">Lets Go!</button>
 				</form>
+                {% endif %}
 			</section>
 			<span class="push"></span>
 		</div>

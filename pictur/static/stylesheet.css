@@ -141,6 +141,13 @@ nav {
   .close:hover {
     cursor: pointer; }
 
+.nav-name {
+  font-family: "Roboto", sans-serif;
+  display: inline-block;
+  color: #e4e4e4;
+  font-weight: 300;
+  font-size: 1.2em; }
+
 .google-signin-link {
   border: 0; }
 
@@ -164,8 +171,8 @@ nav {
   margin: 0 auto;
   padding: 30px;
   background-color: #e5e5e5;
-  margin-top: 50px;
-  position: relative; }
+  position: relative;
+  top: 50px; }
   .signup-page h1 {
     color: #FF4351;
     font-size: 2.6em; }

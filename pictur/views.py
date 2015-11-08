@@ -58,9 +58,14 @@ def login_attempt(token, profile): # Google login was successful, so we attempt 
         user.active = True
         success = flask_login.login_user(user)
         #return str(success) + ':' + user.to_string()
-        return redirect(url_for('protected')) # Login successful
+        return redirect(url_for('index')) # Login successful redirect to main page
     # Email not registered, ask if they want to register
-    return jsonify(token=token, profile=profile)    
+    uid = sql_controller.insert_user("", google_email)
+    user = User()
+    user.uid = uid
+    user.active = True
+    flask_login.login_user(user)
+    return redirect(url_for('signup')) 
 #    return jsonify(token=token, profile=profile)
     
 # jsonify(token=token, profile=profile)
@@ -82,7 +87,7 @@ def testauth():
 @app.route('/logout')
 def logout():
     flask_login.logout_user()
-    return 'logged out' + '<meta http-equiv="refresh" content="1;url=/" />'
+    return redirect(url_for('index'))
     
 
 @login_manager.user_loader # Shouldn't be called?
@@ -116,9 +121,6 @@ def protected():
 # START ACTUAL WEBSITE
 
 def process_upload(request):
-    user = flask_login.current_user
-    if user.is_anonymous():
-        user = User()
     file = request.files['file']
     if file:
         tags = request.form['tags']
@@ -150,6 +152,12 @@ def id_to_path(pid):
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     page_context = {}
+    user = flask_login.current_user
+    if user.is_anonymous():
+        user = User()
+    else:
+        if len(user.username.strip()) == 0:
+            return redirect(url_for('signup'))
     if request.method == 'POST' and UPLOADS_FOLDER is not '':
         image_id = process_upload(request) # get a real user later
         return redirect(url_for('image', image_id = image_id))
@@ -169,6 +177,9 @@ def image(image_id):
     user = flask_login.current_user
     if user.is_anonymous():
         user = User()
+    else:
+        if len(user.username.strip()) == 0: 
+            return redirect(url_for('signup'))
     if request.method == 'POST' and UPLOADS_FOLDER is not '':
         source = request.form['source']
         if source == 'post':
@@ -177,8 +188,8 @@ def image(image_id):
         elif source == 'comment':
             process_comment(request, image_id)
             return redirect(url_for('image', image_id = image_id))
-        elif source == 'editcomment':
-            process_comment(request, image_id)
+        elif source == 'commentedit':
+            edit_comment(request)
             return redirect(url_for('image', image_id = image_id))
         elif source == 'deletepost':
             sql_controller.delete_post(image_id)
@@ -193,6 +204,11 @@ def image(image_id):
 
 @app.route('/search', methods=['GET', 'POST'])
 def search_comment():
+    user = flask_login.current_user
+    if user.is_anonymous():
+        user = User()
+    else:
+        if len(user.username.strip()) == 0: return redirect(url_for('signup'))
     if request.method == 'POST' and UPLOADS_FOLDER is not '':
         image_id = process_upload(request) # get a real user later
         return redirect(url_for('image', image_id = image_id))
@@ -205,7 +221,19 @@ def search_comment():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    if request.method == 'POST' and UPLOADS_FOLDER is not '':
-        image_id = process_upload(request) # get a real user later
-        return redirect(url_for('image', image_id = image_id))
-    return render_template('signup.html')
+    page_context = {}
+    page_context['from_google'] = 0
+    if request.method == 'POST':
+        name = request.form['signup-name']
+        if len(name.strip()) == 0:
+            return redirect(url_for('signup'))
+        sql_controller.update_user(flask_login.current_user.uid, name)
+        return redirect(url_for('index'))
+    user = flask_login.current_user
+    if user.is_anonymous():
+        page_context['google_url'] = google_login.authorization_url()
+        return render_template('signup.html', page_context = page_context)
+    if len(user.username.strip()) == 0:
+        page_context['from_google'] = 1
+        return render_template('signup.html', page_context = page_context)
+        

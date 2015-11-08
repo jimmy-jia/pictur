@@ -14,6 +14,13 @@ def get_user_by_uid(uid):
     conn.close()
     return result.fetchone()
 
+def insert_user(nickname, email):
+    user_table, conn = initialize_db_connection("User")
+    ins = user_table.insert().values(nickname=nickname, email=email)
+    result = conn.execute(ins)  
+    conn.close()
+    return result.inserted_primary_key
+    
 def insert_post(tags, uid, description, title):
     post_table, conn = initialize_db_connection("Post")
     ins = post_table.insert().values(tags=tags, uid=uid, description=description, likes=0, title=title)
@@ -30,7 +37,13 @@ def insert_comment(pid, uid, description, pcid):
 
 def update_comment(cid, description):
     comment_table, conn = initialize_db_connection("Comment")
-    upd = comment_table.update().where(comeent_table.c.cid==cid).values(text=description)
+    upd = comment_table.update().where(comment_table.c.cid==cid).values(text=description)
+    conn.execute(upd)
+    conn.close()
+    
+def update_user(uid, nickname):
+    user_table, conn = initialize_db_connection("User")
+    upd = user_table.update().where(user_table.c.uid==uid).values(nickname=nickname)
     conn.execute(upd)
     conn.close()
 
@@ -85,7 +98,10 @@ def select_comments_for_post(pid):
         reformat['text'] = comment[comment_table.c.text]
         reformat['time'] = comment[comment_table.c.time]
         reformat['uid'] = comment[comment_table.c.uid]
-        reformat['uname'] = get_user_by_uid(comment[comment_table.c.uid])['nickname']
+        reformat['uname'] = 'Anonymous'
+        user = get_user_by_uid(comment[comment_table.c.uid])
+        if user:
+            reformat['uname'] = get_user_by_uid(comment[comment_table.c.uid])['nickname']
         reformat['parent_cid'] = comment[comment_table.c.parent_cid]
         reformat['post_pid'] = comment[comment_table.c.post_pid]
         reformat['children'] = []

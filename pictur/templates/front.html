@@ -28,7 +28,8 @@
 				<nav id="navbar">
 					<input type="text" placeholder="search" onkeypress="handleSearch(event)" id="search-box"></input>
                     {% if page_context['username'] %}
-                    logout
+					<p class="nav-name">{{page_context['username']}}</p>
+                    <a href="logout">logout</a>
                     {% else %}
 					<a onclick="showSignIn('{{ page_context['google_url'] }}')">sign in</a>
 					<a href="signup">sign up</a>
