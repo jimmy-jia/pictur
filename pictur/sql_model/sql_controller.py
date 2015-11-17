@@ -122,6 +122,24 @@ def tag_search(tag, n):
     sel = post_table.select().where(post_table.c.tags.contains(tag)).limit(n)
     result = conn.execute(sel)
     return result
+    
+def get_comments_by_email(email):
+    engine = create_engine("mysql+pymysql://root:4tspicturhost@localhost/pictur")
+    conn = engine.connect()
+    meta = MetaData()
+    meta.bind = engine
+    result = engine.execute("SELECT likes, text, time FROM Comment, User WHERE User.uid = Comment.uid AND User.email = %s", email)
+    return result
+    
+    
+def get_posts_commented_by_email(email):
+    engine = create_engine("mysql+pymysql://root:4tspicturhost@localhost/pictur")
+    conn = engine.connect()
+    meta = MetaData()
+    meta.bind = engine
+    result = engine.execute("SELECT Post.pid, Post.title, Post.likes FROM Post, Comment, User WHERE Comment.uid = User.uid AND Comment.post_pid = Post.pid AND User.email = %s GROUP BY Post.pid", email)
+    return result
+    
 
 def initialize_db_connection(table_name):
     engine = create_engine("mysql+pymysql://root:4tspicturhost@localhost/pictur")
