@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+	<head>
+		<title>pictur</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<meta charset="utf-8">
+		<base href="/">
+		<link href="static/stylesheet.css" rel="stylesheet" type="text/css">
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,300,400|Open+Sans+Condensed:300|Lato|Montserrat|Source+Sans+Pro:400,700italic|Varela|Poiret One|Roboto:100,300,400,900|Roboto+Slab|Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
+		<link rel="icon" href="static/favicon.ico">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	</head>
+	<body>
+		<span id="modal"></span>
+		<div class="wrapper">
+			<header>
+				<a href="/">pictur</a>
+				<a class="mobile-nav" onclick="showMobileNav()">
+					<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
+						<g>
+							<path id="svg_3" fill="white" d="m4.04949,8.47441l8,0c0.275,0 0.5,-0.225 0.5,-0.5c0,-0.276 -0.225,-0.5 -0.5,-0.5l-8,0c-0.276,0 -0.5,0.224 -0.5,0.5c0,0.275 0.224,0.5 0.5,0.5z"/>
+							<path id="svg_4" fill="white" d="m4.04949,5.47441l8,0c0.275,0 0.5,-0.224 0.5,-0.5s-0.225,-0.5 -0.5,-0.5l-8,0c-0.276,0 -0.5,0.224 -0.5,0.5s0.224,0.5 0.5,0.5z"/>
+							<path id="svg_5" fill="white" d="m4.04949,11.47441l8,0c0.275,0 0.5,-0.225 0.5,-0.5s-0.225,-0.5 -0.5,-0.5l-8,0c-0.276,0 -0.5,0.225 -0.5,0.5s0.224,0.5 0.5,0.5z"/>
+						</g>
+					</svg>
+				</a>
+				<nav id="navbar">
+					<input type="text" placeholder="search" onkeypress="handleSearch(event)" id="search-box"></input>
+                    {% if page_context['username'] %}
+					<a href="../p/{{page_context['uid']}}" class="nav-name">{{page_context['username']}}</a>
+                    <a href="logout">logout</a>
+                    {% else %}
+					<a onclick="showSignIn('{{ page_context['google_url'] }}')">sign in</a>
+					<a href="signup">sign up</a>
+                    {% endif %}
+					<a onclick="showUpload()">upload</a>
+				</nav>
+			</header>
+			<div id="main">
+				<div class="preload">
+					<img src="static/resources/icons/btn_google_signin_dark_pressed_web.png"/>
+					<img src="static/resources/icons/btn_google_signin_dark_focus_web.png"/>
+					<img src="static/resources/icons/btn_google_signin_dark_normal_web.png"/>
+				</div>
+				<section class="upload" id="upload-section">
+					<form action="" method=post enctype=multipart/form-data>
+						<span onclick="showUpload()" class="close">
+							<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+							    <path d="M0 0h24v24H0z" fill="none"/>
+							</svg>
+						</span>
+						<h1>Upload</h1>
+						<div class="upload-wrapper">
+							<input type="text" id="fileUpload-text"></input>
+							<label for="fileupload">Choose File</label>
+							<input type=file name=file id="fileupload" onchange="updateUpload(this)"/>
+						</div>
+						<input required type="text" name=title placeholder="title"/>
+						<textarea required name=description placeholder="description"></textarea>
+						<input required type="text" name=tags placeholder="tags"/>
+						<button type=submit value="post" name="source">Upload</button>
+					</form>
+				</section>
+                {% block body %}
+                {% endblock %}
+			<span class="push"></span>
+		</div>
+		<footer>
+		</footer>
+	</body>
+	<script src="/static/app.js"></script>
+</html>

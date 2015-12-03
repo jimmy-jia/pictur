@@ -50,6 +50,14 @@ Temporary Items
 *.html~
 *.css~
 
+#sensitive init files
+*.wsgi
+*.wsgi~
+
 # Uploaded images
 pictur/static/resources/postimages
 .idea/
+
+#script and training set for training the comment generator
+comment_trainer.py
+comments.txt

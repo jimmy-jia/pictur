@@ -14,8 +14,14 @@ function showUpload(){
 	}
 }
 function handleSearch(event){
+	var emailregex = /.+@.+/;
 	if(event.keyCode === 13){
-		window.location.href = "http://pictur.ml:2086/search?tag="+$("#search-box")[0].value;
+		var result = emailregex.test($("#search-box")[0].value);
+		if(result){
+			window.location.href = "http://pictur.ml/usersearch?email="+$("#search-box")[0].value;
+		}
+		else
+			window.location.href = "http://pictur.ml/search?tag="+$("#search-box")[0].value;
 	}
 	return false;
 }
@@ -83,9 +89,43 @@ function deleteComment(i){
 function getNextPage(){
 	var urlParams = location.search.split('page=')[1];
 	if(urlParams){
-		window.location.href = "http://pictur.ml:2086?page="+(Number(urlParams)+1);
+		window.location.href = "http://pictur.ml?page="+(Number(urlParams)+1);
 	}
 	else{
-		window.location.href = "http://pictur.ml:2086?page=2";
+		window.location.href = "http://pictur.ml?page=2";
+	}
+}
+
+function getPrevPage(){
+	var urlParams = location.search.split('page=')[1];
+	if(Number(urlParams)>1){
+		window.location.href = "http://pictur.ml?page="+(Number(urlParams)-1);
+	}
+}
+
+function profileShow(i){
+	
+	switch(i){
+		case 0: $("#profile-submissions-posts").hide();
+				$("#profile-comments").hide();
+				$('#profile-nav-1').addClass('profile-active-tab');
+				$('#profile-nav-2').removeClass('profile-active-tab');
+				$('#profile-nav-3').removeClass('profile-active-tab');
+				$("#profile-submissions-uploads").fadeIn(400);
+				break;
+		case 1: $("#profile-submissions-uploads").hide();
+				$("#profile-comments").hide();
+				$('#profile-nav-2').addClass('profile-active-tab');
+				$('#profile-nav-1').removeClass('profile-active-tab');
+				$('#profile-nav-3').removeClass('profile-active-tab');
+				$("#profile-submissions-posts").fadeIn(400);
+				break;
+		case 2: $("#profile-submissions-posts").hide();
+				$("#profile-submissions-uploads").hide();
+				$('#profile-nav-3').addClass('profile-active-tab');
+				$('#profile-nav-2').removeClass('profile-active-tab');
+				$('#profile-nav-1').removeClass('profile-active-tab');
+				$("#profile-comments").fadeIn(400);
+	
 	}
 }

@@ -47,7 +47,7 @@ header {
   position: fixed;
   width: 100%;
   z-index: 1;
-  background-color: #FF4351;
+  background-color: #ff4351;
   padding: 10px 0; }
   header a:first-child {
     color: #f1f1f1;
@@ -137,7 +137,7 @@ nav {
     width: 35px;
     transition: fill 0.4s; }
     .close svg:hover {
-      fill: #FF4351; }
+      fill: #ff4351; }
   .close:hover {
     cursor: pointer; }
 
@@ -174,7 +174,7 @@ nav {
   position: relative;
   top: 50px; }
   .signup-page h1 {
-    color: #FF4351;
+    color: #ff4351;
     font-size: 2.6em; }
   .signup-page p {
     font-family: "Lato";
@@ -190,7 +190,7 @@ nav {
     background-color: #f1f1f1;
     transition: background-color 0.4s;
     border: 0;
-    border-bottom: 4px solid #FF4351;
+    border-bottom: 4px solid #ff4351;
     display: block; }
   .signup-page label {
     font-family: "Roboto", sans-serif;
@@ -203,7 +203,7 @@ nav {
     width: auto; }
   .signup-page input:active + label, .signup-page input:focus + label {
     margin-top: -90px;
-    background-color: #FF4351;
+    background-color: #ff4351;
     color: white; }
   .signup-page input:active, .signup-page input:focus {
     outline: 0;
@@ -226,16 +226,16 @@ nav {
   background-repeat: no-repeat; }
   .home .banner h1 {
     font-size: 3em;
-    color: #FF4351;
+    color: #ff4351;
     text-align: center;
     padding-top: 100px; }
   .home .banner h3 {
     font-size: 1.7em;
-    color: #FF4351;
+    color: #ff4351;
     text-align: center;
     padding-top: 15px; }
 
-.post-container {
+.post-container, #profile-submissions-uploads, #profile-comments {
   -moz-column-count: 5;
   -webkit-column-count: 5;
   column-count: 5;
@@ -244,12 +244,12 @@ nav {
   margin: 0 auto;
   background-color: #f1f1f1;
   padding: 20px; }
-  .post-container div {
+  .post-container div, #profile-submissions-uploads div, #profile-comments div {
     width: 100%;
     max-width: 100%;
     height: auto;
     display: inline-block; }
-    .post-container div a {
+    .post-container div a, #profile-submissions-uploads div a, #profile-comments div a {
       width: 100%;
       max-height: 400px;
       height: auto;
@@ -257,25 +257,25 @@ nav {
       overflow: hidden;
       opacity: 0.9;
       transition: opacity 0.4s; }
-      .post-container div a:hover {
+      .post-container div a:hover, #profile-submissions-uploads div a:hover, #profile-comments div a:hover {
         opacity: 1;
         cursor: pointer; }
-      .post-container div a img {
+      .post-container div a img, #profile-submissions-uploads div a img, #profile-comments div a img {
         width: 100%;
         height: auto; }
 
 @media(max-width: 1300px) {
-  .post-container {
+  .post-container, #profile-submissions-uploads, #profile-comments {
     -moz-column-count: 4;
     -webkit-column-count: 4;
     column-count: 4; } }
 @media(max-width: 900px) {
-  .post-container {
+  .post-container, #profile-submissions-uploads, #profile-comments {
     -moz-column-count: 3;
     -webkit-column-count: 3;
     column-count: 3; } }
 @media(max-width: 600px) {
-  .post-container {
+  .post-container, #profile-submissions-uploads, #profile-comments {
     -moz-column-count: 2;
     -webkit-column-count: 2;
     column-count: 2; }
@@ -286,7 +286,7 @@ nav {
       top: 0;
       right: 0; } }
 @media(max-width: 375px) {
-  .post-container {
+  .post-container, #profile-submissions-uploads, #profile-comments {
     -moz-column-count: 1;
     -webkit-column-count: 1;
     column-count: 1; } }
@@ -320,6 +320,10 @@ nav {
     font-weight: 300; }
   .post-info .post-author {
     margin-left: 10px; }
+    .post-info .post-author a {
+      transition: color 0.4s; }
+      .post-info .post-author a:hover {
+        color: #ff4351; }
 
 .post-description {
   background-color: #ddd;
@@ -337,7 +341,7 @@ nav {
   .post-tags a {
     color: #212121; }
     .post-tags a:hover {
-      color: #FF4351; }
+      color: #ff4351; }
 
 .post-vote {
   position: absolute;
@@ -346,7 +350,7 @@ nav {
   padding: 8px; }
 
 .upvote, .downvote, .post-button, .next-page-button, .signup-page button {
-  background-color: #FF4351;
+  background-color: #ff4351;
   border: 0;
   color: white;
   width: 30px;
@@ -375,7 +379,7 @@ nav {
     font-family: "Roboto", sans-serif;
     padding: 10px 20px;
     font-size: 1.2em;
-    background-color: #FF4351; }
+    background-color: #ff4351; }
 
 .comment {
   position: relative;
@@ -387,10 +391,10 @@ nav {
   transition: all 0.4s; }
   .comment:hover {
     padding-left: 30px;
-    border-left: 8px solid #FF4351;
+    border-left: 8px solid #ff4351;
     background-color: #f1f1f1; }
   .comment a:hover {
-    color: #FF4351; }
+    color: #ff4351; }
 
 .comment-author, .comment-datetime {
   display: inline-block; }
@@ -407,7 +411,7 @@ nav {
   font-family: "Source Sans Pro", sans-serif; }
 
 .comment-child {
-  margin-left: 30px;
+  margin-left: 10px;
   margin-top: 10px; }
 
 .child-a {
@@ -422,7 +426,7 @@ nav {
   position: absolute;
   right: 20px;
   top: 20px;
-  color: #FF4351;
+  color: #ff4351;
   font-weight: bold; }
   .comment-reply:hover {
     cursor: pointer;
@@ -508,7 +512,7 @@ nav {
   padding: 0; }
   .delete-comment:hover {
     cursor: pointer;
-    color: #FF4351; }
+    color: #ff4351; }
 
 .upload {
   display: none;
@@ -531,7 +535,7 @@ nav {
     max-width: 100%;
     background-color: transparent;
     border: 0;
-    border-bottom: 2px solid #FF4351;
+    border-bottom: 2px solid #ff4351;
     display: block;
     margin: 0 auto;
     padding: 20px;
@@ -546,7 +550,7 @@ nav {
     width: auto;
     margin-top: 20px;
     border: 0;
-    background-color: #FF4351;
+    background-color: #ff4351;
     color: white;
     padding: 15px 15px;
     font-family: "Roboto", sans-serif;
@@ -566,7 +570,7 @@ nav {
     position: absolute;
     left: -99999px; }
   .upload-wrapper label {
-    background-color: #FF4351;
+    background-color: #ff4351;
     padding: 15px 5px;
     font-family: "Roboto", sans-serif;
     font-weight: 300;
@@ -621,14 +625,14 @@ nav {
     border: 0;
     transition: background-color 0.4s;
     background-color: transparent;
-    border-bottom: 1px solid #FF4351;
+    border-bottom: 1px solid #ff4351;
     color: #f1f1f1; }
     .login form input:active, .login form input:focus {
       outline: 0;
       background-color: white;
       color: black; }
   .login form button {
-    background-color: #FF4351;
+    background-color: #ff4351;
     border: 0;
     padding: 13px;
     color: #f1f1f1;
@@ -640,11 +644,92 @@ nav {
 .next-page-button, .signup-page button {
   position: static;
   width: auto;
-  margin: 0 auto;
-  display: block;
+  margin: 0;
+  display: inline-block;
+  margin-left: 5px;
   margin-bottom: 35px;
   font-size: 1.5em;
   padding: 20px;
   height: auto; }
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%; }
+
+.profile {
+  max-width: 100%;
+  width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f1f1f1; }
+
+.profile-user img {
+  display: inline-block;
+  float: left;
+  margin-right: 8px; }
+.profile-user div {
+  /*p:last-of-type
+   * margin-top: 5px
+   * max-width: 100%
+   * background-color: darken($white, 3)
+   * display: block
+   * margin-left: 208px
+   * padding: 5px
+   * a:hover
+   * 	color: $secondary-color */ }
+  .profile-user div p {
+    display: inline-block;
+    margin-right: 5px; }
+.profile-user a {
+  clear: both; }
+  .profile-user a:hover {
+    color: #ff4351; }
+
+.profile-submissions {
+  padding-top: 8px;
+  clear: both; }
+
+.profile-submissions-nav {
+  padding: 15px 0px 0px;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center; }
+  .profile-submissions-nav a {
+    color: #ff4351;
+    padding: 15px;
+    transition: background-color 0.4s, color 0.4s;
+    border-bottom: 4px solid #ff4351;
+    width: 49%;
+    text-align: center;
+    margin-right: 4px; }
+    .profile-submissions-nav a:hover {
+      color: #f1f1f1;
+      background-color: #ff4351; }
+  .profile-submissions-nav .profile-active-tab {
+    color: #f1f1f1;
+    background-color: #ff4351; }
+
+#profile-submissions-uploads, #profile-comments {
+  -moz-column-count: 3;
+  -webkit-column-count: 3;
+  column-count: 3;
+  max-width: 100%;
+  width: 900px;
+  padding: 5px;
+  background-color: #e5e5e5; }
+
+#profile-submissions-posts {
+  display: none; }
+
+#profile-comments {
+  display: none; }
+
+.hr-separator {
+  width: 800px;
+  max-width: 90%;
+  margin-bottom: 20px;
+  margin-top: 20px; }
 
 /*# sourceMappingURL=stylesheet.css.map */

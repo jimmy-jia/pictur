@@ -1,76 +1,27 @@
-<!doctype html>
-<html>
-	<head>
-		<title>pictur</title>
-		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
-		<meta charset="utf-8">
-		<link href="static/stylesheet.css" rel="stylesheet" type="text/css">
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,300,400|Open+Sans+Condensed:300|Lato|Montserrat|Source+Sans+Pro:400,700italic|Varela|Poiret One|Roboto:100,300,400,900|Roboto+Slab|Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
-		<link rel="icon" href="favicon.ico">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	</head>
-	<body>
-		<span id="modal"></span>
-		<div class="wrapper">
-			<header>
-				<a href="/">pictur</a>
-				<a class="mobile-nav" onclick="showMobileNav()">
-					<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
-						<g>
-							<path id="svg_3" fill="white" d="m4.04949,8.47441l8,0c0.275,0 0.5,-0.225 0.5,-0.5c0,-0.276 -0.225,-0.5 -0.5,-0.5l-8,0c-0.276,0 -0.5,0.224 -0.5,0.5c0,0.275 0.224,0.5 0.5,0.5z"/>
-							<path id="svg_4" fill="white" d="m4.04949,5.47441l8,0c0.275,0 0.5,-0.224 0.5,-0.5s-0.225,-0.5 -0.5,-0.5l-8,0c-0.276,0 -0.5,0.224 -0.5,0.5s0.224,0.5 0.5,0.5z"/>
-							<path id="svg_5" fill="white" d="m4.04949,11.47441l8,0c0.275,0 0.5,-0.225 0.5,-0.5s-0.225,-0.5 -0.5,-0.5l-8,0c-0.276,0 -0.5,0.225 -0.5,0.5s0.224,0.5 0.5,0.5z"/>
-						</g>
-					</svg>
-				</a>
-				<nav id="navbar">
-					<input type="text" placeholder="search" onkeypress="handleSearch(event)" id="search-box"></input>
-					<a onclick="showSignIn('{{ page_context['google_url'] }}')">sign in</a>
-					<a href="/signup">sign up</a>
-					<a onclick="showUpload()">upload</a>
-				</nav>
-			</header>
-			<div id="main">
-				<section class="upload" id="upload-section">
-					<form action="" method=post enctype=multipart/form-data>
-						<span onclick="showUpload()" class="close">
-							<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-							    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-							    <path d="M0 0h24v24H0z" fill="none"/>
-							</svg>
-						</span>
-						<h1>Upload</h1>
-						<div class="upload-wrapper">
-							<input type="text" id="fileUpload-text"></input>
-							<label for="fileupload">Choose File</label>
-							<input type=file name=file id="fileupload" onchange="updateUpload(this)"/>
-						</div>
-						<input required type="text" name=title placeholder="title"/>
-						<textarea required name=description placeholder="description"></textarea>
-						<input required type="text" name=tags placeholder="tags"/>
-						<button type=submit value="post" name="source">Upload</button>
-					</form>
-				</section>
+{% extends "header.html" %}
+{% import 'comment_macros.html' as cms %}
+{% block body %}
 
 				<section class="post">
 					<div class="post-info">
 						<h1 class="post-title">{{ post.title }}</h1>
-						<h3 class="post-author">Posted by: {{ page_context.nickname }}</h3>
+						<h3 class="post-author">Posted by: <a href="../p/{{post.uid}}">{{ page_context.nickname }}</a></h3>
 						<h3 class="post-datetime">at {{ post.time }}</h3>
 					</div>
-					<div class="post-vote">
+					<!--<div class="post-vote">
 						<button class="upvote"></button>
 						<button class="downvote"></button>
-					</div>
+					</div>-->
 					<div class="post-image">
 						<img src="{{ image }}"/>
 					</div>
 					<div class="post-subinfo">
 						<h4 class="post-description">{{ post.description }}</h4>
+						{% if post.uid == page_context['uid'] and page_context['uid'] != 0 and page_context['uid'] != -1%}
 						<form action="" method=post enctype=multipart/form-data>
 							<button class="post-button delete-post" name="source" value="deletepost" onclick="return confirm('Are you sure you want to delete this post?')">delete</button>
 						</form>
+						{% endif %}
 						<div class="post-tags">
 							<p>Tags:</p>
 							{% for tag in tags %}
@@ -81,71 +32,36 @@
 					<div class="post-comments">
 						<p>Comments</p>
 
-						{% macro childacomment(comment) %}
-						<div class="comment comment-child child-a" data-commentid="{{comment.cid}}">
-							<div class="comment-vote">
-								<button class="upvote"></button>
-								<button class="downvote"></button>
-							</div>
-							<p class="comment-author">{{ comment.uname }}</p>
-							<p class="comment-datetime">{{ comment.time }}</p>
-							<p class="comment-text">{{ comment.text }}</p>
-							<a onclick="editComment(this)">edit</a>
-							{% if comment.uid == -1 %}
-								<form class="delete-comment-form" action="" method=post enctype=multipart/form-data>
-									<input type="hidden" name="parentcid" value="{{comment.cid}}"></input>
-									<button class="delete-comment" name="source" value="deletepost" onclick="return confirm('Are you sure you want to delete this comment?')">delete</button>
-								</form>
-							{% endif %}
-							<button class="comment-reply" onclick="showReply(this)">reply</button>
-							{% for c in comment.children %} 
-							    {{ childbcomment(c) }}
-							{% endfor %}
-						</div>
-						{% endmacro %}
 
-						{% macro childbcomment(comment) %}
-						<div class="comment comment-child child-b" data-commentid="{{comment.cid}}">
-							<div class="comment-vote">
-								<button class="upvote"></button>
-								<button class="downvote"></button>
-							</div>
-							<p class="comment-author">{{ comment.uname }}</p>
-							<p class="comment-datetime">{{ comment.time }}</p>
-							<p class="comment-text">{{ comment.text }}</p>
-							<a onclick="editComment(this)">edit</a>
-							{% if comment.uid == -1 %}
-								<form class="delete-comment-form" action="" method=post enctype=multipart/form-data>
-									<input type="hidden" name="parentcid" value="{{comment.cid}}"></input>
-									<button class="delete-comment" name="source" value="deletepost" onclick="return confirm('Are you sure you want to delete this comment?')">delete</button>
-								</form>
-							{% endif %}
-							<button class="comment-reply" onclick="showReply(this)">reply</button>
-							{% for c in comment.children %} 
-							    {{ childacomment(c) }}
-							{% endfor %}
-						</div>
-						{% endmacro %}
 
 						{% for comment in comments %}
 						    <div class="comment" data-commentid="{{comment.cid}}">
-							    <div class="comment-vote">
+							    <!--<div class="comment-vote">
 								    <button class="upvote"></button>
 								    <button class="downvote"></button>
-							    </div>
-                                <p class="comment-author">{{ comment.uname }}</p>
+							    </div>-->
+                                {% if comment.uid == -1 %}
+                                <p class="comment-author">[deleted]</p>
+                                {% else %}
+                                <a class="comment-author" href="../p/{{comment.uid}}">{{ comment.uname }}</a>
+                                {% endif %}
 							    <p class="comment-datetime">{{ comment.time }}</p>
-							    <p class="comment-text">{{ comment.text }}</p>
-								<a onclick="editComment(this)">edit</a>
-								{% if comment.uid == -1 %}
+							    {% if comment.uid == -1 %}
+                                <p class="comment-text">[deleted]</p>
+                                {% else %}
+                                <p class="comment-text">{{ comment.text }}</p>
+                                {% endif %}
+								{% if comment.uid == page_context['uid'] and (page_context['uid'] != 0 and page_context['uid'] != -1)%}
+									<a onclick="editComment(this)">edit</a>
 									<form class="delete-comment-form" action="" method=post enctype=multipart/form-data>
-										<input type="hidden" name="parentcid" value="{{comment.cid}}"></input>
-										<button class="delete-comment" name="source" value="deletepost" onclick="return confirm('Are you sure you want to delete this comment?')">delete</button>
+										<input type="hidden" name="cid" value="{{comment.cid}}"></input>
+										<button class="delete-comment" name="source" value="deletecomment" onclick="return confirm('Are you sure you want to delete this comment?')">delete</button>
 									</form>
+									
 								{% endif %}
-							    <button class="comment-reply" onclick="showReply(this)">reply</button>
+								<button class="comment-reply" onclick="showReply(this)">reply</button>
 							    {% for c in comment.children %} 
-								{{ childacomment(c) }}
+								{{ cms.childacomment(c, page_context) }}
 							    {% endfor %}
 						    </div>
 						{% endfor %}
@@ -154,17 +70,10 @@
 						<p>Post a comment!</p>
 						<form action="" method=post enctype=multipart/form-data>
 							<input type="hidden" name="parentcid" value="0"></input>
-							<textarea required title="Please enter a comment!" name="content"></textarea>
+							<textarea required title="Please enter a comment!" name="content">{{ page_context['auto_comment'] }}</textarea>
 							<button class="post-button" type=submit name="source" value="comment">Post</button>
 						</form>
 					</div>
 				</section>
 			</div>
-
-			<span class="push"></span>
-		</div>
-		<footer>
-		</footer>
-	</body>
-	<script src="/static/app.js"></script>
-</html>
+{% endblock %}

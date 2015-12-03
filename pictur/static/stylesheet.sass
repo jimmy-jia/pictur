@@ -1,5 +1,5 @@
 $main-color: #2c3e50
-$secondary-color: #FF4351//cc4444
+$secondary-color: #ff4351 //#7b72e9 //#FF4351//cc4444
 $tertiary-color: #7B72E9 
 $gold: #ffee99
 $white: #f1f1f1
@@ -314,6 +314,10 @@ nav
 		font-weight: 300
 	.post-author
 		margin-left: 10px
+		a
+			transition: color .4s
+			&:hover
+				color: $secondary-color
 .post-description
 	background-color: #ddd
 	margin: 0
@@ -398,7 +402,7 @@ nav
 	font-family: "Source Sans Pro", sans-serif
 
 .comment-child
-	margin-left: 30px
+	margin-left: 10px
 	margin-top: 10px
 .child-a
 	background-color: #ccc
@@ -627,9 +631,93 @@ nav
 	@extend .post-button
 	position: static
 	width: auto
-	margin: 0 auto
-	display: block
+	margin: 0
+	display: inline-block
+	margin-left: 5px
 	margin-bottom: 35px
 	font-size: 1.5em
 	padding: 20px
 	height: auto
+	
+.button-container
+	display: flex
+	justify-content: center
+	width: 100%
+	
+.profile
+	max-width: 100%
+	width: 800px
+	margin: 0 auto
+	padding: 20px
+	background-color: $white
+.profile-user
+	img
+		display: inline-block
+		float: left
+		margin-right: 8px
+	div
+		p
+			display: inline-block
+			margin-right: 5px
+		/*p:last-of-type
+			margin-top: 5px
+			max-width: 100%
+			background-color: darken($white, 3)
+			display: block
+			margin-left: 208px
+			padding: 5px
+			a:hover
+				color: $secondary-color*/
+	a
+		clear: both
+		&:hover
+			color: $secondary-color
+.profile-submissions
+	padding-top: 8px
+	clear: both
+.profile-submissions-nav
+
+	padding: 15px 0px 0px
+	position: relative
+	z-index: 2
+	display: flex
+	justify-content: center
+	
+	a
+		color: $secondary-color
+		//background-color: #cc2222
+		padding: 15px
+		transition: background-color .4s, color .4s
+		border-bottom: 4px solid $secondary-color
+		width: 49%
+		text-align: center
+		margin-right: 4px
+		&:hover
+			//background-color: #dd3333
+			color: $white
+			background-color: $secondary-color
+
+	.profile-active-tab
+		color: $white
+		background-color: $secondary-color
+	
+			
+#profile-submissions-uploads, #profile-comments
+	@extend .post-container
+	-moz-column-count: 3
+	-webkit-column-count: 3
+	column-count: 3
+	max-width: 100%
+	width: 900px
+	padding: 5px
+	background-color: #e5e5e5
+#profile-submissions-posts
+	display: none
+#profile-comments
+	display: none
+
+.hr-separator
+	width: 800px
+	max-width: 90%
+	margin-bottom: 20px
+	margin-top: 20px

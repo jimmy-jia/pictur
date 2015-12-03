@@ -1,0 +1,58 @@
+{% extends "header.html" %}
+{% block body %}
+				<section class="profile">
+					<div class="profile-user">
+						<img src="http://www.gravatar.com/avatar/{{page_context['avatar']}}?s=200&d=retro"/>
+						<div>
+							<h1>{{page_context['nickname']}}</h1>
+							<p class="profile-upload-count">Uploads: {{page_context['postcount']}}</p>
+							<p class="profile-post-count">Comments: {{page_context['commentcount']}}</p>
+							{% if page_context['uid'] == page_context['profileid']|int %}
+							<br>
+							<a class="profile-bio" href="https://en.gravatar.com/" target="_blank">[Edit Profile Image]</a>
+							{% endif %}
+
+						</div>
+					</div>
+					<div class="profile-submissions">
+						<div class="profile-submissions-nav">
+							<a id="profile-nav-1" class="profile-active-tab" onclick="profileShow(0)">Uploads</a>
+							<a id="profile-nav-2" onclick="profileShow(1)">Comments</a>
+							<a id="profile-nav-3" onclick="profileShow(2)">Interactions</a>
+						</div>
+						<div class="profile-submissions-container">
+							<div id="profile-submissions-uploads">
+							
+								{% for post in page_context['posts'] %}
+									<div><a href="../i{{post[0]}}" >
+										<img src="{{ page_context['id_to_path'](post['pid'])|thumbnail('480x480') }}"/>
+									</a></div>
+								{% endfor %}
+							
+							</div>
+							<div id="profile-submissions-posts">
+								{% for comment in page_context['comments'] %}
+								<div class="comment comment-child">
+									<!--<div class="comment-vote">
+										<button class="upvote"></button>
+										<button class="downvote"></button>
+									</div>-->
+									<p class="comment-author">{{page_context['nickname']}}</p>
+									<p class="comment-datetime">{{comment.time}}</p>
+									<p class="comment-text">{{comment.text}}</p>
+									<button class="comment-reply" onclick="showReply(this)">reply</button>
+									<a href="../i{{comment.post_pid}}">source</a>
+								</div>
+								{% endfor %}
+							</div>
+							<div id="profile-comments">
+								{% for post in page_context['commented_on'] %}
+									<div><a href="../i{{post[0]}}" >
+										<img src="{{ page_context['id_to_path'](post['pid'])|thumbnail('480x480') }}"/>
+									</a></div>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				</section>
+{% endblock %}
