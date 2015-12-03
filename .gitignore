@@ -56,6 +56,7 @@ Temporary Items
 
 # Uploaded images
 pictur/static/resources/postimages
+pictur/static/resources/thumbnails
 .idea/
 
 #script and training set for training the comment generator
